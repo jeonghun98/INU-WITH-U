@@ -26,6 +26,10 @@ public class RegisterRequest extends StringRequest {
         map.put("u_major", userMajor);
         map.put("u_phone", userPhone);
         map.put("u_mid", userMid + "");
+
+        //stamp 에 넣을 변수값
+        int def = 0;
+        map.put("default", def+"");
     }
 
     @Override
