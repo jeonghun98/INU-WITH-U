@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "582680518311",
+    "project_id": "iwu",
+    "storage_bucket": "iwu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:582680518311:android:3d5df03436047a0b368582",
+        "android_client_info": {
+          "package_name": "org.techtown.iwu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "582680518311-bvst5343p90op7fngct6j8birvatphar.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.techtown.iwu",
+            "certificate_hash": "83b0196c7a6b4fb6640c8f1a086e2676aff72890"
+          }
+        },
+        {
+          "client_id": "582680518311-6j8f4m7navlfh0lgfemjeu5cr6o850jn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5Tfdb4zMnzEImfivEoD9OPX8st12bLN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "582680518311-6j8f4m7navlfh0lgfemjeu5cr6o850jn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
