@@ -1,374 +1,427 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteX="1dp"
+    tools:layout_editor_absoluteY="1dp"
     android:background="@drawable/_dinu"
-    tools:context=".StampActivity">
+    tools:context=".StampActivity"
+    android:weightSum="10"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/text4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
-        android:fontFamily="@font/pfstardust"
-        android:text="스탬프 현황"
-        android:textColor="#303F9F"
-        android:textSize="35sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/MapStamp"
+            android:text="2D MAP으로 보기"
 
-    <ImageButton
-        android:id="@+id/stamp1"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text4"
-        app:srcCompat="@drawable/icon" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:gravity="center"
 
-    <ImageButton
-        android:id="@+id/stamp2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toEndOf="@+id/stamp1"
-        app:layout_constraintTop_toBottomOf="@+id/text4"
-        app:srcCompat="@drawable/icon" />
+            android:background="#00b2ed"
+            android:fontFamily="@font/pfstardust"
+            android:paddingHorizontal="10dip"
+            android:layout_margin="12dp"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
 
-    <ImageButton
-        android:id="@+id/stamp3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="28dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/stamp2"
-        app:layout_constraintTop_toBottomOf="@+id/text4"
-        app:srcCompat="@drawable/icon" />
+            />
 
-    <ImageButton
-        android:id="@+id/stamp4"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stamp1"
-        app:srcCompat="@drawable/icon" />
+        <TextView
+            android:id="@+id/text4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:fontFamily="@font/pfstardust"
+            android:text="스탬프 현황"
+            android:textColor="#303F9F"
+            android:textSize="35sp"
+            android:textStyle="bold"
+            android:layout_weight="1"
 
-    <ImageButton
-        android:id="@+id/stamp5"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toEndOf="@+id/stamp4"
-        app:layout_constraintTop_toBottomOf="@+id/stamp2"
-        app:srcCompat="@drawable/icon" />
+            />
 
-    <ImageButton
-        android:id="@+id/stamp6"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="28dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/stamp5"
-        app:layout_constraintTop_toBottomOf="@+id/stamp3"
-        app:srcCompat="@drawable/icon" />
 
-    <ImageButton
-        android:id="@+id/stamp7"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stamp4"
-        app:srcCompat="@drawable/icon" />
 
-    <ImageButton
-        android:id="@+id/stamp8"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toEndOf="@+id/stamp7"
-        app:layout_constraintTop_toBottomOf="@+id/stamp5"
-        app:srcCompat="@drawable/icon" />
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:columnCount="3"
+            android:orientation="horizontal"
+            android:layout_weight="8"
+            >
 
-    <ImageButton
-        android:id="@+id/stamp9"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="28dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/stamp8"
-        app:layout_constraintTop_toBottomOf="@+id/stamp6"
-        app:srcCompat="@drawable/icon" />
 
-    <ImageButton
-        android:id="@+id/stamp10"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="28dp"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stamp7"
-        app:srcCompat="@drawable/icon" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/stamp11"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="32dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toEndOf="@+id/stamp10"
-        app:layout_constraintTop_toBottomOf="@+id/stamp8"
-        app:srcCompat="@drawable/icon" />
+                <ImageButton
+                    android:id="@+id/stamp1"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/icon" />
 
-    <ImageButton
-        android:id="@+id/stamp12"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="28dp"
-        android:background="@android:color/transparent"
-        android:scaleType="fitCenter"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/stamp11"
-        app:layout_constraintTop_toBottomOf="@+id/stamp9"
-        app:srcCompat="@drawable/icon" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/pfstardust"
 
-    <android.widget.Button
-        android:id="@+id/MapStamp"
-        android:layout_width="110dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="#00b2ed"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:text="2D MAP으로 보기"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+                    android:gravity="center"
+                    android:text="1호관"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/stamp1txt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:text="1호관"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/stamp4"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stamp1"
-        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/stamp2txt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:text="2호관"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/stamp5"
-        app:layout_constraintStart_toEndOf="@+id/stamp1txt"
-        app:layout_constraintTop_toBottomOf="@+id/stamp2"
-        app:layout_constraintVertical_bias="0.0" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/stamp3txt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:text="6호관"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/stamp6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/stamp2txt"
-        app:layout_constraintTop_toBottomOf="@+id/stamp3"
-        app:layout_constraintVertical_bias="0.0" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/stamp4txt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:text="11호관"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/stamp7"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stamp4"
-        app:layout_constraintVertical_bias="0.0" />
+                <ImageButton
+                    android:id="@+id/stamp2"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/icon" />
 
-    <TextView
-        android:id="@+id/stamp5txt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:text="12호관"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/stamp8"
-        app:layout_constraintStart_toEndOf="@+id/stamp4txt"
-        app:layout_constraintTop_toBottomOf="@+id/stamp5"
-        app:layout_constraintVertical_bias="0.0" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/pfstardust"
 
-    <TextView
-        android:id="@+id/stamp6txt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:text="17호관"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/stamp9"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/stamp5txt"
-        app:layout_constraintTop_toBottomOf="@+id/stamp6"
-        app:layout_constraintVertical_bias="0.0" />
+                    android:gravity="center"
+                    android:text="2호관"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/stamp7txt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:text="18호관"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/stamp10"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stamp7"
-        app:layout_constraintVertical_bias="0.0" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/stamp8txt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:text="24호관"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/stamp11"
-        app:layout_constraintStart_toEndOf="@+id/stamp7txt"
-        app:layout_constraintTop_toBottomOf="@+id/stamp8"
-        app:layout_constraintVertical_bias="0.0" />
+                <ImageButton
+                    android:id="@+id/stamp3"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/icon" />
 
-    <TextView
-        android:id="@+id/stamp9txt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:text="30호관"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/stamp12"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/stamp8txt"
-        app:layout_constraintTop_toBottomOf="@+id/stamp9"
-        app:layout_constraintVertical_bias="0.0" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/pfstardust"
 
-    <TextView
-        android:id="@+id/stamp10txt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:text="미유카페"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/stamp10"
-        app:layout_constraintVertical_bias="0.0" />
+                    android:gravity="center"
+                    android:text="6호관"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
 
-    <TextView
-        android:id="@+id/stamp11txt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:text="솔찬공원"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/stamp10txt"
-        app:layout_constraintTop_toBottomOf="@+id/stamp11"
-        app:layout_constraintVertical_bias="0.0" />
+            </LinearLayout>
 
-    <TextView
-        android:id="@+id/stamp12txt"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="28dp"
-        android:fontFamily="@font/pfstardust"
-        android:gravity="center"
-        android:hint="단과대"
-        android:text=""
-        android:textColor="@color/black"
-        android:textColorHint="@color/common_google_signin_btn_text_light"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/stamp11txt"
-        app:layout_constraintTop_toBottomOf="@+id/stamp12"
-        app:layout_constraintVertical_bias="0.0" />
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageButton
+                    android:id="@+id/stamp4"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/icon" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/pfstardust"
+
+                    android:gravity="center"
+                    android:text="11호관"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/stamp5"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/icon" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/pfstardust"
+
+                    android:gravity="center"
+                    android:text="12호관"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/stamp6"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/icon" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/pfstardust"
+
+                    android:gravity="center"
+                    android:text="17호관"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/stamp7"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/icon" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/pfstardust"
+
+                    android:gravity="center"
+                    android:text="18호관"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/stamp8"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/icon" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/pfstardust"
+
+                    android:gravity="center"
+                    android:text="24호관"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/stamp9"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/icon" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/pfstardust"
+
+                    android:gravity="center"
+                    android:text="30호관"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_columnWeight="1"
+                >
+
+                <ImageButton
+                    android:id="@+id/stamp10"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/icon" />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+
+                    android:fontFamily="@font/pfstardust"
+                    android:text="미유카페"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_columnWeight="1"
+                >
+
+                <ImageButton
+                    android:id="@+id/stamp11"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/icon"  />
+
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+
+                    android:fontFamily="@font/pfstardust"
+                    android:text="솔찬공원"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_columnWeight="1"
+                >
+
+                <ImageButton
+                    android:id="@+id/stamp12"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="16dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/icon"  />
+
+                <TextView
+                    android:id="@+id/stamp12txt"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+
+                    android:fontFamily="@font/pfstardust"
+                    android:hint="단과대"
+                    android:textColor="@color/black"
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+
+        </GridLayout>
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

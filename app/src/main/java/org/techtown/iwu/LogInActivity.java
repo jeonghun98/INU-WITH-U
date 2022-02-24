@@ -83,19 +83,64 @@ public class LogInActivity extends AppCompatActivity {
                                 int userPhone = jsonObject.getInt( "u_phone" );
                                 int userMid = jsonObject.getInt("u_mid");
 
+                                int UserStamp1 = jsonObject.getInt("b1_stamp");
+                                int UserStamp2 = jsonObject.getInt("b2_stamp");
+                                int UserStamp3 = jsonObject.getInt("b6_stamp");
+                                int UserStamp4 = jsonObject.getInt("b11_stamp");
+                                int UserStamp5 = jsonObject.getInt("b12_stamp");
+                                int UserStamp6 = jsonObject.getInt("b17_stamp");
+                                int UserStamp7 = jsonObject.getInt("b18_stamp");
+                                int UserStamp8 = jsonObject.getInt("b24_stamp");
+                                int UserStamp9 = jsonObject.getInt("b30_stamp");
+                                int UserStamp10 = jsonObject.getInt("b31_stamp");
+                                int UserStamp11 = jsonObject.getInt("b32_stamp");
+                                int UserStamp12 = jsonObject.getInt("b0_stamp");
+
                                 Toast.makeText(LogInActivity.this,userMajor+ " "+ userName+"학생, 환영합니다!",Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(LogInActivity.this, MainButtonActivity.class); // 로그인 후 메뉴화면으로 이동
-                                intent.putExtra("u_id", userID); // MainActivity로 유저정보 넘김
+                                Intent intent = new Intent(LogInActivity.this, MainButtonActivity.class);
+                                intent.putExtra("u_id", userID); // MainButtonActivity로 유저정보 넘김
                                 intent.putExtra("u_pw", userPass);
                                 intent.putExtra("u_name", userName);
                                 intent.putExtra("u_major", userMajor);
                                 intent.putExtra("u_phone", userPhone);
                                 intent.putExtra("u_mid", userMid);
 
+                                intent.putExtra("b1_stamp", UserStamp1);
+                                intent.putExtra("b2_stamp", UserStamp2);
+                                intent.putExtra("b6_stamp", UserStamp3);
+                                intent.putExtra("b11_stamp", UserStamp4);
+                                intent.putExtra("b12_stamp", UserStamp5);
+                                intent.putExtra("b17_stamp", UserStamp6);
+                                intent.putExtra("b18_stamp", UserStamp7);
+                                intent.putExtra("b24_stamp", UserStamp8);
+                                intent.putExtra("b30_stamp", UserStamp9);
+                                intent.putExtra("b31_stamp", UserStamp10);
+                                intent.putExtra("b32_stamp", UserStamp11);
+                                intent.putExtra("b0_stamp", UserStamp12);
+
+                                int userBuilding = 15;
+                                if (1 <= userMid && userMid <= 6) userBuilding = 15;
+                                else if (7 <= userMid && userMid <= 11) userBuilding = 5;
+                                else if (12 <= userMid && userMid <= 21) userBuilding = 13;
+                                else if (22 <= userMid && userMid <= 29) userBuilding = 8;
+                                else if (30 <= userMid && userMid <= 32) userBuilding = 7;
+                                else if (33 <= userMid && userMid <= 34) userBuilding = 14;
+                                else if (35 <= userMid && userMid <= 39) userBuilding = 16;
+                                else if (40 <= userMid && userMid <= 47) userBuilding = 20;
+                                else if (48 <= userMid && userMid <= 50) userBuilding = 28;
+                                else if (51 <= userMid && userMid <= 53) userBuilding = 29;
+                                intent.putExtra("u_Building", userBuilding);
+
                                 startActivity(intent); // MainButtonActivity 시작
                             }
                             else { // 로그인에 실패한 경우
-                                Toast.makeText(LogInActivity.this, "로그인 실패하였습니다.", Toast.LENGTH_SHORT).show();
+                                AlertDialog.Builder builder=new AlertDialog.Builder( LogInActivity.this );
+                                dialog = builder.setMessage("로그인에 실패하였습니다.")
+                                        .setPositiveButton("확인",null)
+                                        .create();
+                                dialog.show();
+                                return;
+                                //Toast.makeText(LogInActivity.this, "로그인 실패하였습니다.", Toast.LENGTH_SHORT).show();
                             }
                         } catch (JSONException e) { // 예외처리
                             e.printStackTrace();

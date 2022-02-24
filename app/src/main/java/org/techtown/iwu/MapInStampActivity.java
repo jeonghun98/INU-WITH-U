@@ -17,8 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MapInStampActivity extends AppCompatActivity {
     FrameLayout stampinmap;
-    int mapselect;
-    //mapselect를 string에서 int형으로 교체함
+    int userBuilding;
 
     // DB에서 user의 building stamp 데이터 가져올 예정 (초깃값은 false로 스탬프가 비어있도록 해두었음)
     boolean b1_stamp = false, b2_stamp = false, b6_stamp = false,b11_stamp = false,b12_stamp = false,b17_stamp = false;
@@ -32,7 +31,7 @@ public class MapInStampActivity extends AppCompatActivity {
         stampinmap.addView(new PointView(this));
 
         Intent intent = getIntent();
-        mapselect = intent.getIntExtra("mapselect", 8); //u_mid default 29 -> mapselect 8
+        userBuilding = intent.getIntExtra("u_Building", 15);
     }
 
     private class PointView extends View { // 좌표 찍는(그리는) class
@@ -79,17 +78,17 @@ public class MapInStampActivity extends AppCompatActivity {
             canvas.drawBitmap(stamp31, 105, 555, paint); // 미유(31)
             canvas.drawBitmap(stamp32, 123, 135, paint); // 솔찬공원(32)
 
-            if (mapselect == 5) canvas.drawBitmap(stampsele, 545, 980, paint); // 5호관
-            else if (mapselect == 7) canvas.drawBitmap(stampsele, 335, 795, paint); // 7호관
-            else if (mapselect == 8) canvas.drawBitmap(stampsele, 235, 695, paint); // 8호관
-            else if (mapselect == 13) canvas.drawBitmap(stampsele, 644, 702, paint); // 13 호관
-            else if (mapselect == 14) canvas.drawBitmap(stampsele, 680, 600, paint); // 14 호관
-            else if (mapselect == 15) canvas.drawBitmap(stampsele, 540, 478, paint); // 15 호관
-            else if (mapselect == 16) canvas.drawBitmap(stampsele, 430, 400, paint); // 16 호관
-            else if (mapselect == 20) canvas.drawBitmap(stampsele, 480, 150, paint); // 20 호관
-            //else if (mapselect == 23) canvas.drawBitmap(stampsele, 606, 1220, paint); // 23호관 강당(mapselect에 없어서 일단 제외함)
-            else if (mapselect == 28) canvas.drawBitmap(stampsele, 0, 670, paint); // 28호관
-            else if (mapselect == 29) canvas.drawBitmap(stampsele, 105, 555, paint); // 29호관
+            if (userBuilding == 5) canvas.drawBitmap(stampsele, 545, 980, paint); // 5호관
+            else if (userBuilding == 7) canvas.drawBitmap(stampsele, 335, 795, paint); // 7호관
+            else if (userBuilding == 8) canvas.drawBitmap(stampsele, 235, 695, paint); // 8호관
+            else if (userBuilding == 13) canvas.drawBitmap(stampsele, 644, 702, paint); // 13 호관
+            else if (userBuilding == 14) canvas.drawBitmap(stampsele, 680, 600, paint); // 14 호관
+            else if (userBuilding == 15) canvas.drawBitmap(stampsele, 540, 478, paint); // 15 호관
+            else if (userBuilding == 16) canvas.drawBitmap(stampsele, 430, 400, paint); // 16 호관
+            else if (userBuilding == 20) canvas.drawBitmap(stampsele, 480, 150, paint); // 20 호관
+                //else if (userBuilding == 23) canvas.drawBitmap(stampsele, 606, 1220, paint); // 23호관 강당(userBuilding 없어서 일단 제외함)
+            else if (userBuilding == 28) canvas.drawBitmap(stampsele, 0, 670, paint); // 28호관
+            else if (userBuilding == 29) canvas.drawBitmap(stampsele, 105, 555, paint); // 29호관
         }
     }
 }

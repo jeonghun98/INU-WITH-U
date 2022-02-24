@@ -47,7 +47,6 @@ public class QuizActivity extends AppCompatActivity { // 퀴즈
 
         Random random = new Random();
         rand = random.nextInt(4); // 랜덤으로 변경 0-3
-//      int b_id = 13;
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -64,7 +63,7 @@ public class QuizActivity extends AppCompatActivity { // 퀴즈
                         String q_an2 = jasonObject.getString("q_an2");
                         String q_an3 = jasonObject.getString("q_an3");
 
-                        //화면에 맞게 string 중간에 \n 추가
+                        //화면에 맞게 string 중간에 \n 추가 -> 글씨에 맞는 UI 적용 예정
                         String question = "";
                         String[] Str = q_qu.split("\\\\");
                         for(int i = 0; i < Str.length; i++) {
@@ -139,7 +138,11 @@ public class QuizActivity extends AppCompatActivity { // 퀴즈
         });
     }
 
+
     private void showMessage_quiz(int key) {
+        Intent intent = getIntent();
+        int b_id = intent.getIntExtra("b_id", 0);
+        String u_id = intent.getStringExtra("u_id"); // u_id 받기
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("결과");
         if (key == 0) builder.setMessage("정답입니다. 스탬프를 획득하셨습니다.");
@@ -148,12 +151,10 @@ public class QuizActivity extends AppCompatActivity { // 퀴즈
         builder.setNeutralButton("나가기", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (key == 0) { // 정답일때 나가기를 누르면 값을 넘겨주며 현재 액티비티 종료
-                    //Intent intent = new Intent();
-                    //intent.putExtra("정답", rand);
-                    //setResult(RESULT_OK, intent);
-
-                    //quiz 정답 -> 스탬프 DB에서 사용 예정(코트 추가)
+                if(key == 0) {
+                    StampRequest Stamprequest = new StampRequest(u_id, b_id, response -> onClick(dialog, which)); // 나가기 버튼 누르면 DB로 전송
+                    RequestQueue queue = Volley.newRequestQueue(QuizActivity.this);
+                    queue.add(Stamprequest);
                     finish();
                 }
             }
@@ -161,5 +162,4 @@ public class QuizActivity extends AppCompatActivity { // 퀴즈
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
 }
