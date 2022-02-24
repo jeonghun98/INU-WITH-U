@@ -81,18 +81,7 @@ public class MainButtonActivity extends AppCompatActivity {
 
         Intent intent = getIntent(); // 앞의 LogInActivity에서 넘긴 정보 받기
         userBuilding = intent.getIntExtra("u_Building", 15); // Major code 받아오기
-        int UserStamp1 = intent.getIntExtra("b1_stamp", 0); //유저 스탬프 정보 받아오기
-        int UserStamp2 = intent.getIntExtra("b2_stamp", 0);
-        int UserStamp3 = intent.getIntExtra("b6_stamp", 0);
-        int UserStamp4 = intent.getIntExtra("b11_stamp", 0);
-        int UserStamp5 = intent.getIntExtra("b12_stamp", 0);
-        int UserStamp6 = intent.getIntExtra("b17_stamp", 0);
-        int UserStamp7 = intent.getIntExtra("b18_stamp", 0);
-        int UserStamp8 = intent.getIntExtra("b24_stamp", 0);
-        int UserStamp9 = intent.getIntExtra("b30_stamp", 0);
-        int UserStamp10 = intent.getIntExtra("b31_stamp", 0);
-        int UserStamp11 = intent.getIntExtra("b32_stamp", 0);
-        int UserStamp12 = intent.getIntExtra("b0_stamp", 0);
+        String userID = intent.getStringExtra("u_id"); // u_id 받기
 
         MainStampbtn = (ImageButton) findViewById(R.id.mainstampbtn); // MainStampbtn 받아오기
         MainStampbtn.setOnClickListener(new View.OnClickListener() { // 메인화면에서 stamp 버튼 클릭 시 수행
@@ -100,18 +89,8 @@ public class MainButtonActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), StampActivity.class); // StampActivity 수행
                 intent.putExtra("u_Building", userBuilding); // Major code 넘겨주기
-                intent.putExtra("b1_stamp", UserStamp1); //UserStamp1 넘겨주기
-                intent.putExtra("b2_stamp", UserStamp2);
-                intent.putExtra("b6_stamp", UserStamp3);
-                intent.putExtra("b11_stamp", UserStamp4);
-                intent.putExtra("b12_stamp", UserStamp5);
-                intent.putExtra("b17_stamp", UserStamp6);
-                intent.putExtra("b18_stamp", UserStamp7);
-                intent.putExtra("b24_stamp", UserStamp8);
-                intent.putExtra("b30_stamp", UserStamp9);
-                intent.putExtra("b31_stamp", UserStamp10);
-                intent.putExtra("b32_stamp", UserStamp11);
-                intent.putExtra("b0_stamp", UserStamp12);
+                intent.putExtra("u_id", userID);// u_id 같이 넘겨주기 (string)
+
                 startActivity(intent); // StampActivity 시작
             }
         });
