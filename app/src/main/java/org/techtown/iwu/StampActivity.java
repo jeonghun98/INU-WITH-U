@@ -103,17 +103,18 @@ public class StampActivity extends AppCompatActivity {
                         }if(b0_stamp == 1){
                             ImageButton btn12 = (ImageButton) findViewById(R.id.stamp12);
                             btn12.setImageResource(R.drawable.stamp);
-                        } else {
-                            Toast.makeText(getApplicationContext(), "가져오기 실패", Toast.LENGTH_SHORT).show();
                         }
+                    }
+                    else { // [hun] success ->if else 문 자리 변경
+                        Toast.makeText(getApplicationContext(), "가져오기 실패", Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
         };
-        //[ay.han]DB연결 위한 StampRequest 실행
-        StampRequest Request = new StampRequest(userID, responseListener);
+        //[ay.han]DB연결 위한 StampRequest 실행 -> [hun] php 파일 변경으로 StampCheckRequest 변경
+        StampCheckRequest Request = new StampCheckRequest(userID, responseListener);
         RequestQueue queue = Volley.newRequestQueue(StampActivity.this);
         queue.add(Request);
 

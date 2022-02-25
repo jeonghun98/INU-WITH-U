@@ -21,13 +21,15 @@ public class StampRequest extends StringRequest {
         map.put("b_id",b_id +"");
     }
 
-    //[ay.han] u_id만 변수로 가지는 생성자
-    public StampRequest(String u_id,Response.Listener<String> listener){
-        super(Method.POST,URL,listener,null);
-        // int succeed = 1;
-        map=new HashMap<>();
-        map.put("u_id",u_id); // string으로 받은 id
-    }
+//[hun] php 병합으로 인한 전공 건물 오류 -> StampCheckRequest 추가 후 변경
+//
+//    //[ay.han] u_id만 변수로 가지는 생성자
+//    public StampRequest(String u_id,Response.Listener<String> listener){
+//        super(Method.POST,URL,listener,null);
+//        // int succeed = 1;
+//        map=new HashMap<>();
+//        map.put("u_id",u_id); // string으로 받은 id
+//    }
 
     @Override
     protected Map<String, String> getParams() throws AuthFailureError {

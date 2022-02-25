@@ -17,12 +17,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 
 public class MainButtonActivity extends AppCompatActivity {
     ImageButton MainMapbtn, MainSetbtn, MainStampbtn; //이미지버튼 Map, Setting, Stamp 선언
     FrameLayout previewFrame; //카메라 뷰를 위한 frame
     CameraSurfaceView cameraView; //카메라
     ImageButton btn; //임시 방편 어워드 버튼
+    String userID;
     int b_id = 0;
     private int userBuilding = 15, userBuilding_index = 5; //건물(MajorCode 인문대15호관), b_name_major의 5번째 index -> 15호관
 
@@ -38,6 +46,10 @@ public class MainButtonActivity extends AppCompatActivity {
             {37.375958, 126.633253},{37.376634, 126.632989},{37.375525, 126.631994},
             {37.374711, 126.631248},{37.374885, 126.629619}, {37.371838, 126.632742},
             {37.372351, 126.631278}};
+
+    //DB에서 가져온 stamp 정보 : index 0 -> 건물 / index : 1 -> 현재 stamp 현황
+    private int b_stamp [][] = {{1,0},{2,0},{6,0},{11,0},{12,0},{17,0},{18,0},{24,0},{30,0},{31,0},{32,0}};
+    private int b_stamp_major = 0; //major building stamp
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,17 +107,85 @@ public class MainButtonActivity extends AppCompatActivity {
             }
         });
 
-        for(int i = 0; i < b_name_major.length; i++) {               //유저의 전공을 받아 건물이 해당 리스트의 몇번째 인덱스인지 체크
+        for(int i = 0; i < b_name_major.length; i++) {   //유저의 전공을 받아 건물이 해당 리스트의 몇번째 인덱스인지 체크
             if (userBuilding == b_name_major[i]) userBuilding_index = i; //아래 위치 정보에서 중복을 방지하기 위해서
         }
+        //[hun] onResume 에서도 실행하나 로그인 후 DB를 가져오지 않아 onCreate 에서도 한번 더 추가함
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject JO = new JSONObject(response);
+                    boolean success = JO.getBoolean("success");
+                    if (success) {
+                        b_stamp[0][1] = JO.getInt("b1_stamp");
+                        b_stamp[1][1] = JO.getInt("b2_stamp");
+                        b_stamp[2][1] = JO.getInt("b6_stamp");
+                        b_stamp[3][1] = JO.getInt("b11_stamp");
+                        b_stamp[4][1] = JO.getInt("b12_stamp");
+                        b_stamp[5][1] = JO.getInt("b17_stamp");
+                        b_stamp[6][1] = JO.getInt("b18_stamp");
+                        b_stamp[7][1] = JO.getInt("b24_stamp");
+                        b_stamp[8][1] = JO.getInt("b30_stamp");
+                        b_stamp[9][1] = JO.getInt("b31_stamp");
+                        b_stamp[10][1] = JO.getInt("b32_stamp");
+                        b_stamp_major = JO.getInt("b0_stamp");
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        StampCheckRequest Request = new StampCheckRequest(userID, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(MainButtonActivity.this);
+        queue.add(Request);
 
         startLocationService(); //위치 활성화
     }
 
+    //[hun] 다른 activity 종료할때 계속 onResume 에서 stamp db check
+    @Override
+    protected void onResume() {
+        super.onResume();
+        Response.Listener<String> responseListener = new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject JO = new JSONObject(response);
+                    boolean success = JO.getBoolean("success");
+                    if (success) {
+                        b_stamp[0][1] = JO.getInt("b1_stamp");
+                        b_stamp[1][1] = JO.getInt("b2_stamp");
+                        b_stamp[2][1] = JO.getInt("b6_stamp");
+                        b_stamp[3][1] = JO.getInt("b11_stamp");
+                        b_stamp[4][1] = JO.getInt("b12_stamp");
+                        b_stamp[5][1] = JO.getInt("b17_stamp");
+                        b_stamp[6][1] = JO.getInt("b18_stamp");
+                        b_stamp[7][1] = JO.getInt("b24_stamp");
+                        b_stamp[8][1] = JO.getInt("b30_stamp");
+                        b_stamp[9][1] = JO.getInt("b31_stamp");
+                        b_stamp[10][1] = JO.getInt("b32_stamp");
+                        b_stamp_major = JO.getInt("b0_stamp");
+                    }
+                    else {
+                        Toast.makeText(getApplicationContext(), "실패", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        StampCheckRequest Request = new StampCheckRequest(userID, responseListener);
+        RequestQueue queue = Volley.newRequestQueue(MainButtonActivity.this);
+        queue.add(Request);
+    }
 
     private void showMessage_award() { //어워드 획득 후 나타나는 dialog 메소드
         Intent intent = getIntent();
-        String userID = intent.getStringExtra("u_id"); // u_id 받기
+        userID = intent.getStringExtra("u_id"); // u_id 받기
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String b_name;
         if(b_id == 31 || b_id == 32) b_name = b_name_str[b_id-31]; // 미유와 솔찬공원
@@ -140,28 +220,33 @@ public class MainButtonActivity extends AppCompatActivity {
             if (location != null) {
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
-                //String message = "start -> Latitude : " + latitude + "\nLongitude : " + longitude;
-                //showToast(message);
+
                 btn = findViewById(R.id.imagebtn);
 
                 //사용자의 위치가 해당 건물의 위도,경도를 중심으로 원안에 위치해 있을 때 visible
                 for(int i = 0; i < b_location.length; i++) {
-                    if (Math.pow(0.0004, 2) >= (Math.pow(b_location[i][0] - latitude, 2) + Math.pow(b_location[i][1] - longitude, 2))) {
-                        btn.setVisibility(View.VISIBLE);
-                        b_id = b_name[i];
-                        break;
+                    if(b_stamp[i][1] == 0){ //스탬프 현황 확인 후 체크
+                        if (Math.pow(0.0004, 2) >= (Math.pow(b_location[i][0] - latitude, 2) + Math.pow(b_location[i][1] - longitude, 2))) {
+                            btn.setVisibility(View.VISIBLE);
+                            b_id = b_name[i];
+                            break;
+                        }
+                        else {
+                            btn.setVisibility(View.INVISIBLE);
+                        }
                     }
                     else {
                         btn.setVisibility(View.INVISIBLE);
                     }
                 }
-                if(Math.pow(0.0004, 2) >= (Math.pow(b_location_major[userBuilding_index][0] - latitude, 2) + Math.pow(b_location_major[userBuilding_index][1] - longitude, 2))){
-                    btn.setVisibility(View.VISIBLE);
-                    b_id = b_name_major[userBuilding_index]; // == MajorCode
+                if(b_stamp_major == 0) { //스탬프 현황 확인 후 체크
+                    if(Math.pow(0.0004, 2) >= (Math.pow(b_location_major[userBuilding_index][0] - latitude, 2) + Math.pow(b_location_major[userBuilding_index][1] - longitude, 2))){
+                        btn.setVisibility(View.VISIBLE);
+                        b_id = b_name_major[userBuilding_index]; // == MajorCode
+                    }
                 }
             }
             else showToast("location == null");
-
             GPSListener gpsListener = new GPSListener();
             long minTime = 2000; // 2초마다 위치 요청
             float minDistance = 0;
@@ -182,19 +267,28 @@ public class MainButtonActivity extends AppCompatActivity {
 
             //사용자의 위치가 해당 건물의 위도,경도를 중심으로 원안에 위치해 있을 때 visible
             btn = findViewById(R.id.imagebtn);
+
             for(int i = 0; i < b_location.length; i++) {
-                if (Math.pow(0.0004, 2) >= (Math.pow(b_location[i][0] - latitude, 2) + Math.pow(b_location[i][1] - longitude, 2))) {
-                    btn.setVisibility(View.VISIBLE);
-                    b_id = b_name[i];
-                    break;
+                if(b_stamp[i][1] == 0){ //스탬프 현황 확인 후 체크
+                    if (Math.pow(0.0004, 2) >= (Math.pow(b_location[i][0] - latitude, 2) + Math.pow(b_location[i][1] - longitude, 2))) {
+                        btn.setVisibility(View.VISIBLE);
+                        b_id = b_name[i];
+                        break;
+                    }
+                    else {
+                        btn.setVisibility(View.INVISIBLE);
+                    }
                 }
                 else {
                     btn.setVisibility(View.INVISIBLE);
                 }
             }
-            if(Math.pow(0.0004, 2) >= (Math.pow(b_location_major[userBuilding_index][0] - latitude, 2) + Math.pow(b_location_major[userBuilding_index][1] - longitude, 2))){
-                btn.setVisibility(View.VISIBLE);
-                b_id = b_name_major[userBuilding_index]; // == MajorCode
+
+            if(b_stamp_major == 0) { //스탬프 현황 확인 후 체크
+                if(Math.pow(0.0004, 2) >= (Math.pow(b_location_major[userBuilding_index][0] - latitude, 2) + Math.pow(b_location_major[userBuilding_index][1] - longitude, 2))){
+                    btn.setVisibility(View.VISIBLE);
+                    b_id = b_name_major[userBuilding_index]; // == MajorCode
+                }
             }
         }
 
