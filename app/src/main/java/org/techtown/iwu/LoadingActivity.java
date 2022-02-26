@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,6 +44,7 @@ public class LoadingActivity extends AppCompatActivity {
                     }
                 })
                 .start();
+        TouchTextAlert(); //[ay.han] 터치하세요 텍스트 출력
     }
 
     // 로딩 2초 -> 터치 이벤트 발생 코드로 수정
@@ -57,6 +61,18 @@ public class LoadingActivity extends AppCompatActivity {
         return true;
     }
 
+    //[ay.han] 터치하세요 버튼 깜박이게 출력
+    public void TouchTextAlert(){
+        Animation anim = new AlphaAnimation(0.0f,1.0f);
+        anim.setDuration(100);
+        anim.setStartOffset(50);
+        anim.setRepeatMode(Animation.REVERSE);
+        anim.setRepeatCount(Animation.INFINITE);
+
+        TextView tid_touchalert = findViewById(R.id.tid_touchalert);
+        tid_touchalert.startAnimation(anim);
+
+    }
 //    private void startLoading() { // 로딩화면 구현 함수
 //        Handler handler = new Handler(); // delay 주기 위해 선언함.
 //        handler.postDelayed(new Runnable() {
