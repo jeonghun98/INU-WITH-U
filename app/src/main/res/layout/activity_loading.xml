@@ -115,10 +115,9 @@
             android:id="@+id/tid_touchalert"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
+
             android:gravity="center"
             android:text="터치하세요"
-
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#114F8E"
             android:textStyle="bold" />
