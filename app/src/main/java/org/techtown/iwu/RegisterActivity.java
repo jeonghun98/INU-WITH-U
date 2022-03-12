@@ -1,11 +1,15 @@
 package org.techtown.iwu;
 
+import android.content.Context;
 import android.content.Intent;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,6 +49,8 @@ public class RegisterActivity extends AppCompatActivity {
         u_name = findViewById(R.id.u_name);
         Spinner spinner = (Spinner)findViewById(R.id.majorbox); // 학과는 Spinner를 통해 받음
         u_phone = findViewById(R.id.u_phone);
+        u_phone.setInputType(android.text.InputType.TYPE_CLASS_PHONE); //휴대폰 형태로 변경
+        u_phone.addTextChangedListener(new PhoneNumberFormattingTextWatcher()); // 입력값에 하이픈(-) 포맷팅 **Android system language가 한국어일때만 3-4-4 가능
         u_mid = findViewById(R.id.codenum); // 비어있더라도 예외처리를 위해서 가져옴
 
         u_id_btn=findViewById(R.id.u_id_btn);
