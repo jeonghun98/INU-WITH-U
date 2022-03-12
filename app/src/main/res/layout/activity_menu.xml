@@ -91,7 +91,7 @@
 
             android:background="#00b2ed"
             android:fontFamily="@font/pfstardust"
-            android:text="게임정보"
+            android:text="게임설명"
             android:textSize="20sp"
             android:textStyle="bold"
             />
