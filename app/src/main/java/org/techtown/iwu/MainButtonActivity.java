@@ -8,6 +8,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
@@ -62,6 +64,9 @@ public class MainButtonActivity extends AppCompatActivity {
         //화면에 나타나는 임시 어워드 (초기 설정 : 보이지 않음)
         btn = findViewById(R.id.imagebtn);
         btn.setVisibility(View.INVISIBLE);
+
+        final Animation rotate_anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        btn.startAnimation(rotate_anim);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
