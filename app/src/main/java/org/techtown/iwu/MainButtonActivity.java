@@ -4,35 +4,61 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.FrameLayout;
+import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.FragmentManager;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import com.naver.maps.geometry.LatLng;
+import com.naver.maps.geometry.LatLngBounds;
+import com.naver.maps.map.CameraPosition;
+import com.naver.maps.map.LocationTrackingMode;
+import com.naver.maps.map.MapFragment;
+import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.overlay.Align;
+import com.naver.maps.map.overlay.LocationOverlay;
+import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.util.FusedLocationSource;
+import com.naver.maps.map.util.MarkerIcons;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
+import com.naver.maps.map.OnMapReadyCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class MainButtonActivity extends AppCompatActivity {
+public class MainButtonActivity extends AppCompatActivity implements OnMapReadyCallback {
+    private static final String TAG = "MainButtonActivity";
     ImageButton MainMapbtn, MainSetbtn, MainStampbtn; //이미지버튼 Map, Setting, Stamp 선언
-    FrameLayout previewFrame; //카메라 뷰를 위한 frame
-    CameraSurfaceView cameraView; //카메라
+//    FrameLayout previewFrame; //카메라 뷰를 위한 frame
+//   CameraSurfaceView cameraView; //카메라
     ImageButton btn; //임시 방편 어워드 버튼
     String userID;
     int b_id = 0;
+    private static final int PERMISSION_REQUEST_CODE = 100; // 위치를 이용하기 위해 권한 요청
+    private static final String[] PERMISSIONS = {
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+    };
+    private FusedLocationSource mLocationSource; // 최적 위치 반환을 위해 선언
+    private NaverMap mNaverMap; // 네이버맵 선언
     private int userBuilding = 15, userBuilding_index = 5; //건물(MajorCode 인문대15호관), b_name_major의 5번째 index -> 15호관
+    private Marker markers[] = new Marker[21];
 
     static final int b_name[] = {1,2,6,11,12,17,18,24,30,31,32}; //31 -> 미유, 32 -> 솔찬
     static final String b_name_str[] = {"미유카페", "솔찬공원"};
@@ -54,10 +80,22 @@ public class MainButtonActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mainbuttons); // activity_main 보이기
+        setContentView(R.layout.activity_mainmap); // activity_main 보이기
 
-        previewFrame = findViewById(R.id.previewFrame);
-        cameraView = findViewById(R.id.cameraView);
+//     previewFrame = findViewById(R.id.previewFrame);
+//      cameraView = findViewById(R.id.cameraView);
+        FragmentManager fm = getSupportFragmentManager(); // MapActivity와 activity_map의 fragment를 연결해주는 매니저
+        MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.mainmapframe); // activity_map의 fragment
+        if (mapFragment == null) {
+            mapFragment = MapFragment.newInstance();
+            fm.beginTransaction().add(R.id.mainmapframe, mapFragment).commit(); // fragment를 activity_map 내의 map에 삽입
+        }
+
+        // getMapAsync를 호출하여 비동기로 onMapReady 콜백 메서드 호출
+        mapFragment.getMapAsync(this);
+
+        // 위치를 반환하는 구현체인 FusedLocationSource 생성
+        mLocationSource = new FusedLocationSource(this, PERMISSION_REQUEST_CODE);
 
         //화면에 나타나는 임시 어워드 (초기 설정 : 보이지 않음)
         btn = findViewById(R.id.imagebtn);
@@ -70,7 +108,7 @@ public class MainButtonActivity extends AppCompatActivity {
             }
         });
 
-        MainMapbtn = (ImageButton) findViewById(R.id.mainmapbtn); // MainMapbtn 받아오기
+        MainMapbtn = (ImageButton) findViewById(R.id.mainmap); // MainMapbtn 받아오기
 
         MainMapbtn.setOnClickListener(new View.OnClickListener() { // 메인화면에서 지도 버튼 클릭 시 수행
             @Override
@@ -80,7 +118,7 @@ public class MainButtonActivity extends AppCompatActivity {
             }
         });
 
-        MainSetbtn = (ImageButton) findViewById(R.id.mainsetbtn); // MainSettingbtn 받아오기
+        MainSetbtn = (ImageButton) findViewById(R.id.mainset); // MainSettingbtn 받아오기
 
         MainSetbtn.setOnClickListener(new View.OnClickListener() { // 메인화면에서 setting 버튼 클릭 시 수행
             @Override
@@ -95,7 +133,7 @@ public class MainButtonActivity extends AppCompatActivity {
         userBuilding = intent.getIntExtra("u_Building", 15); // Major code 받아오기
         String userID = intent.getStringExtra("u_id"); // u_id 받기
 
-        MainStampbtn = (ImageButton) findViewById(R.id.mainstampbtn); // MainStampbtn 받아오기
+        MainStampbtn = (ImageButton) findViewById(R.id.mainstamp); // MainStampbtn 받아오기
         MainStampbtn.setOnClickListener(new View.OnClickListener() { // 메인화면에서 stamp 버튼 클릭 시 수행
             @Override
             public void onClick(View v) {
@@ -144,6 +182,42 @@ public class MainButtonActivity extends AppCompatActivity {
         queue.add(Request);
 
         startLocationService(); //위치 활성화
+    }
+
+    @Override
+    public void onMapReady(@NonNull NaverMap naverMap) {
+        Log.d( TAG, "onMapReady");
+
+        // NaverMap 객체 받아서 NaverMap 객체에 위치 소스 지정
+        mNaverMap = naverMap;
+        mNaverMap.setLocationSource(mLocationSource);
+
+        //min, max 설정 및 지도 이동 범위 설정
+        naverMap.setMinZoom(15.0);
+        naverMap.setMaxZoom(18.0);
+        naverMap.setExtent(new LatLngBounds(new LatLng(37.370463, 126.627007), new LatLng(37.376835, 126.634652)));
+
+        ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_REQUEST_CODE);
+        naverMap.addOnOptionChangeListener(() -> { // 지도 옵션 변경에 대한 이벤트 리스너 등록
+            LocationTrackingMode mode = mNaverMap.getLocationTrackingMode(); // 위치추적모드 반환
+            mLocationSource.setCompassEnabled(mode == LocationTrackingMode.Follow || mode == LocationTrackingMode.Face); // 나침반(카메라 좌표 이용 시) 사용
+            // 권한확인. 결과는 onRequestPermissionsResult 콜백 매서드 호출
+        });
+    }
+
+    @Override // 권한획득 확인하는 함수
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        // request code와 권한획득 여부 확인
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                mNaverMap.setLocationTrackingMode(LocationTrackingMode.Face); // 위치추적 + 카메라 좌표 + 방향 을 움직이는 모드
+            }
+        }
+        LocationOverlay locationOverlay = mNaverMap.getLocationOverlay(); // 지도로부터 위치 오버레이 객체를 가져옴.
+        locationOverlay.setVisible(true); // 지도에 위치 오버레이 나타남.
     }
 
     //[hun] 다른 activity 종료할때 계속 onResume 에서 stamp db check
@@ -256,6 +330,8 @@ public class MainButtonActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
+
 
     class GPSListener implements LocationListener {
         @Override
