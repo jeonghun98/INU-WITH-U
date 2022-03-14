@@ -36,6 +36,7 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), LogInActivity.class); // LogInActivity 실행
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_SINGLE_TOP);    //[ay.han] 기존 acticity 전부 날리기. 로그아웃 이후에도 User 정보 남아있는 이슈로 아래 내용 추가함.
                 startActivity(intent);
                 Toast.makeText(getApplicationContext(),"로그아웃 되었습니다.",Toast.LENGTH_SHORT).show();
             }

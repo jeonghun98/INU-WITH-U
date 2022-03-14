@@ -42,7 +42,7 @@
                         android:layout_marginTop="150dp"
                         android:background="#00FFFFFF"
                         android:clickable="false"
-                        app:srcCompat="@drawable/inulogoxml"
+                        app:srcCompat="@drawable/quizinu"
                         tools:ignore="SpeakableTextPresentCheck" />
 
                 </LinearLayout>

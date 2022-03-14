@@ -63,12 +63,11 @@ public class LoadingActivity extends AppCompatActivity {
 
     //[ay.han] 터치하세요 버튼 깜박이게 출력
     public void TouchTextAlert(){
-        Animation anim = new AlphaAnimation(0.0f,1.0f);
-        anim.setDuration(100);
-        anim.setStartOffset(50);
-        anim.setRepeatMode(Animation.REVERSE);
-        anim.setRepeatCount(Animation.INFINITE);
-
+        Animation anim = new AlphaAnimation(0.0f,1.0f); //투명도 삽입. float형 range 0.0 ~ 1.0
+        anim.setDuration(500);  //지속시간 ms단위. 500 = 0.5s
+        anim.setStartOffset(500);    //다음 애니메이션까지 대기시간
+        anim.setRepeatMode(Animation.REVERSE);  //반복
+        anim.setRepeatCount(Animation.INFINITE);    //무한
         TextView tid_touchalert = findViewById(R.id.tid_touchalert);
         tid_touchalert.startAnimation(anim);
 
