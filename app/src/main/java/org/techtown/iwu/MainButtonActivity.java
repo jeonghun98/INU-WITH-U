@@ -91,12 +91,10 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
         // 위치를 반환하는 구현체인 FusedLocationSource 생성
         mLocationSource = new FusedLocationSource(this, PERMISSION_REQUEST_CODE);
 
-        //화면에 나타나는 임시 어워드 (초기 설정 : 보이지 않음) -> 애니메이션 설정 후 setvisibility 작동 x
+        //화면에 나타나는 임시 어워드 (초기 설정 : 보이지 않음) ->[ay.han]설정값 GONE으로 수정
         btn = findViewById(R.id.imagebtn);
-        btn.setVisibility(View.INVISIBLE);
+        btn.setVisibility(View.GONE);
 
-        final Animation rotate_anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
-        btn.startAnimation(rotate_anim);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -292,27 +290,25 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
                 double latitude = location.getLatitude();
                 double longitude = location.getLongitude();
 
-                btn = findViewById(R.id.imagebtn);
-
                 //사용자의 위치가 해당 건물의 위도,경도를 중심으로 원안에 위치해 있을 때 visible
                 for(int i = 0; i < b_location.length; i++) {
                     if(b_stamp[i][1] == 0){ //스탬프 현황 확인 후 체크
                         if (Math.pow(0.0004, 2) >= (Math.pow(b_location[i][0] - latitude, 2) + Math.pow(b_location[i][1] - longitude, 2))) {
-                            btn.setVisibility(View.VISIBLE);
+                            DisplayEmblem(true);
                             b_id = b_name[i];
                             break;
                         }
                         else {
-                            btn.setVisibility(View.INVISIBLE);
+                            DisplayEmblem(false);
                         }
                     }
                     else {
-                        btn.setVisibility(View.INVISIBLE);
+                        DisplayEmblem(false);
                     }
                 }
                 if(b_stamp_major == 0) { //스탬프 현황 확인 후 체크
                     if(Math.pow(0.0004, 2) >= (Math.pow(b_location_major[userBuilding_index][0] - latitude, 2) + Math.pow(b_location_major[userBuilding_index][1] - longitude, 2))){
-                        btn.setVisibility(View.VISIBLE);
+                        DisplayEmblem(true);
                         b_id = b_name_major[userBuilding_index]; // == MajorCode
                     }
                 }
@@ -331,6 +327,7 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
 
 
     class GPSListener implements LocationListener {
+
         @Override
         public void onLocationChanged(Location location) {
             Double latitude = location.getLatitude();
@@ -339,27 +336,25 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
             //showToast(message);
 
             //사용자의 위치가 해당 건물의 위도,경도를 중심으로 원안에 위치해 있을 때 visible
-            btn = findViewById(R.id.imagebtn);
-
             for(int i = 0; i < b_location.length; i++) {
                 if(b_stamp[i][1] == 0){ //스탬프 현황 확인 후 체크
                     if (Math.pow(0.0004, 2) >= (Math.pow(b_location[i][0] - latitude, 2) + Math.pow(b_location[i][1] - longitude, 2))) {
-                        btn.setVisibility(View.VISIBLE);
+                        DisplayEmblem(true);
                         b_id = b_name[i];
                         break;
                     }
                     else {
-                        btn.setVisibility(View.INVISIBLE);
+                        DisplayEmblem(false);
                     }
                 }
                 else {
-                    btn.setVisibility(View.INVISIBLE);
+                    DisplayEmblem(false);
                 }
             }
 
             if(b_stamp_major == 0) { //스탬프 현황 확인 후 체크
                 if(Math.pow(0.0004, 2) >= (Math.pow(b_location_major[userBuilding_index][0] - latitude, 2) + Math.pow(b_location_major[userBuilding_index][1] - longitude, 2))){
-                    btn.setVisibility(View.VISIBLE);
+                    DisplayEmblem(true);
                     b_id = b_name_major[userBuilding_index]; // == MajorCode
                 }
             }
@@ -377,5 +372,19 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
 
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+    //[ay.han] 앰블럼 출력 여부 함수
+    public void DisplayEmblem(Boolean bool){
+        final Animation rotate_anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
+        btn = findViewById(R.id.imagebtn);
+
+        if (bool){
+            btn.setVisibility(View.VISIBLE);
+            btn.startAnimation(rotate_anim);
+        }else{
+            btn.clearAnimation();
+            btn.setVisibility(View.GONE);
+        }
     }
 }
