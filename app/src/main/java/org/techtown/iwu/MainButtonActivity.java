@@ -91,7 +91,7 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
         // 위치를 반환하는 구현체인 FusedLocationSource 생성
         mLocationSource = new FusedLocationSource(this, PERMISSION_REQUEST_CODE);
 
-        //화면에 나타나는 임시 어워드 (초기 설정 : 보이지 않음)
+        //화면에 나타나는 임시 어워드 (초기 설정 : 보이지 않음) -> 애니메이션 설정 후 setvisibility 작동 x
         btn = findViewById(R.id.imagebtn);
         btn.setVisibility(View.INVISIBLE);
 

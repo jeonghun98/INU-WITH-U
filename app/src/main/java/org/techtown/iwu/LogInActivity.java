@@ -29,6 +29,7 @@ public class LogInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login); // 맨 처음 로그인 화면 띄움
 
+        //[hun] user의 id는 학번 -> text 설정을 number로 변경
         u_id = findViewById(R.id.u_id); // 입력받은 ID와 PW 넘겨받기
         u_pw = findViewById(R.id.u_pw);
         btn_login = findViewById(R.id.LogInButton); // 로그인버튼과 유저등록버튼 넘겨받기

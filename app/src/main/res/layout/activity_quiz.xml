@@ -5,123 +5,102 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@drawable/_dinu"
     tools:context=".QuizActivity">
 
     <TextView
         android:id="@+id/b_text"
+        android:fontFamily="@font/pfstardust"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="70dp"
         android:layout_marginBottom="30dp"
         android:text="Quiz"
-        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textSize="30sp"
         android:textStyle="bold" />
 
     <TextView
+        android:fontFamily="@font/pfstardust"
         android:id="@+id/qu_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="40dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:text="Question"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textColor="@color/black"
+        android:textSize="25sp"
         android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal">
-
-        <Button
-            android:id="@+id/an0_btn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="40dp"
-            android:text="1" />
-
-        <TextView
-            android:id="@+id/an0_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="40dp"
-            android:text="TextView"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
         <Button
             android:id="@+id/an1_btn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="80dp"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
             android:layout_marginTop="40dp"
-            android:text="2" />
-
-        <TextView
-            android:id="@+id/an1_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="40dp"
-            android:text="TextView"
-            android:textSize="20sp" />
-    </LinearLayout>
+            android:layout_marginBottom="40dp"
+            android:background="@color/blue"
+            android:fontFamily="@font/pfstardust"
+            android:text="Answer 2"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal">
+        <Button
+            android:id="@+id/an0_btn"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginBottom="40dp"
+            android:background="@color/blue"
+            android:fontFamily="@font/pfstardust"
+            android:text="Answer 1"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/an2_btn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="40dp"
-            android:text="3" />
-
-        <TextView
-            android:id="@+id/an2_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="40dp"
-            android:text="TextView"
-            android:textSize="20sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal">
+            android:layout_marginBottom="40dp"
+            android:background="@color/blue"
+            android:fontFamily="@font/pfstardust"
+            android:text="Answer 3"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/an3_btn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
             android:layout_marginLeft="80dp"
-            android:layout_marginTop="40dp"
-            android:text="4" />
-
-        <TextView
-            android:id="@+id/an3_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="40dp"
-            android:text="TextView"
-            android:textSize="20sp" />
+            android:background="@color/blue"
+            android:fontFamily="@font/pfstardust"
+            android:text="Answer 4"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColorHighlight="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </LinearLayout>
