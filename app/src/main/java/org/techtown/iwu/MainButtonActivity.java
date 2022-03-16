@@ -18,31 +18,23 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.FrameLayout;
-
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import com.naver.maps.geometry.LatLng;
 import com.naver.maps.geometry.LatLngBounds;
-import com.naver.maps.map.CameraPosition;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
-import com.naver.maps.map.overlay.Align;
 import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.util.FusedLocationSource;
-import com.naver.maps.map.util.MarkerIcons;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
-import com.naver.maps.map.OnMapReadyCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,8 +43,6 @@ import org.json.JSONObject;
 public class MainButtonActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG = "MainButtonActivity";
     ImageButton MainMapbtn, MainSetbtn, MainStampbtn; //이미지버튼 Map, Setting, Stamp 선언
-//    FrameLayout previewFrame; //카메라 뷰를 위한 frame
-//   CameraSurfaceView cameraView; //카메라
     ImageButton btn; //임시 방편 어워드 버튼
     String userID;
     int b_id = 0;
@@ -88,8 +78,6 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainmap); // activity_main 보이기
 
-//     previewFrame = findViewById(R.id.previewFrame);
-//      cameraView = findViewById(R.id.cameraView);
         FragmentManager fm = getSupportFragmentManager(); // MapActivity와 activity_map의 fragment를 연결해주는 매니저
         MapFragment mapFragment = (MapFragment)fm.findFragmentById(R.id.mainmapframe); // activity_map의 fragment
         if (mapFragment == null) {
