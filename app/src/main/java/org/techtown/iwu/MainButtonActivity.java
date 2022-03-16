@@ -30,6 +30,7 @@ import com.naver.maps.map.NaverMap;
 import com.naver.maps.map.OnMapReadyCallback;
 import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
+import com.naver.maps.map.overlay.OverlayImage;
 import com.naver.maps.map.util.FusedLocationSource;
 
 import com.android.volley.RequestQueue;
@@ -375,6 +376,7 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     //[ay.han] 앰블럼 출력 여부 함수
+    //public void DisplayEmblem(Boolean bool, double latitude, double longitude=0){
     public void DisplayEmblem(Boolean bool){
         final Animation rotate_anim = AnimationUtils.loadAnimation(this, R.anim.rotate);
         btn = findViewById(R.id.imagebtn);
@@ -386,5 +388,21 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
             btn.clearAnimation();
             btn.setVisibility(View.GONE);
         }
+
+        /* 한계점 : 원하는 위치에 이미지를 띄울순 있을 것 같으나, 애니메이션 불가
+        LocationOverlay emblem = mNaverMap.getLocationOverlay();
+        emblem.setVisible(true);
+        marker.setIconPerspectiveEnabled(true);
+        emblem.setPosition(new LatLng(latitude, longitude));
+        emblem.setIcon(OverlayImage.fromResource(R.drawable.inulogoxml));
+        emblem.setIconWidth(LocationOverlay.SIZE_AUTO);
+        emblem.setIconHeight(LocationOverlay.SIZE_AUTO);
+
+        emblem.setOnClickListener(overlay -> {
+            showMessage_award();
+            return true;
+        });
+        */
+
     }
 }
