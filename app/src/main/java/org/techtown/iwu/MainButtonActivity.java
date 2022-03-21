@@ -42,7 +42,7 @@ import org.json.JSONObject;
 
 public class MainButtonActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG = "MainButtonActivity";
-    ImageButton MainMapbtn, MainSetbtn, MainStampbtn; //이미지버튼 Map, Setting, Stamp 선언
+    ImageButton MainCambtn, MainSetbtn, MainStampbtn; //이미지버튼 Map, Setting, Stamp 선언
     ImageButton btn; //임시 방편 어워드 버튼
     String userID;
     int b_id = 0;
@@ -105,13 +105,13 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
             }
         });
 
-        MainMapbtn = (ImageButton) findViewById(R.id.mainmap); // MainMapbtn 받아오기
+        MainCambtn = (ImageButton) findViewById(R.id.maincam); // MainMapbtn 받아오기
 
-        MainMapbtn.setOnClickListener(new View.OnClickListener() { // 메인화면에서 지도 버튼 클릭 시 수행
+        MainCambtn.setOnClickListener(new View.OnClickListener() { // 메인화면에서 지도 버튼 클릭 시 수행
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), MapActivity.class); // MapActivity 수행
-                startActivity(intent); // MapActivity 시작
+                Intent intent = new Intent(getApplicationContext(), CameraActivity.class); // MapActivity 수행
+                startActivity(intent); //CameraActivity 시작
             }
         });
 
