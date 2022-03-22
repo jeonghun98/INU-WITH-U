@@ -3,6 +3,7 @@
     package="org.techtown.iwu">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_GPS" />
@@ -11,6 +12,12 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true">
+    </uses-feature>
+
 
     <application
         android:allowBackup="true"
@@ -25,7 +32,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -40,8 +46,8 @@
         <activity android:name=".StampActivity" />
         <activity android:name=".MapInStampActivity" />
         <activity android:name=".WhereStampActivity" />
+        <activity android:name=".CameraActivity" />
         <activity android:name=".QuizActivity" />
-
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="kaqo08g1s6" />
