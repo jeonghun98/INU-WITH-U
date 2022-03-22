@@ -35,10 +35,11 @@ public class QuizActivity extends AppCompatActivity { // 퀴즈
 
         TextView b_text = findViewById(R.id.b_text);
         TextView qu_text = findViewById(R.id.qu_text); // Question text
-        TextView an0_text = findViewById(R.id.an0_text); // Answer text(정답)
-        TextView an1_text = findViewById(R.id.an1_text); // Answer text(오답)
-        TextView an2_text = findViewById(R.id.an2_text); // Answer text(오답)
-        TextView an3_text = findViewById(R.id.an3_text); // Answer text(오답)
+//        [hun] 텍스트 -> 버튼 텍스트로 변경
+//        TextView an0_text = findViewById(R.id.an0_text); // Answer text(정답)
+//        TextView an1_text = findViewById(R.id.an1_text); // Answer text(오답)
+//        TextView an2_text = findViewById(R.id.an2_text); // Answer text(오답)
+//        TextView an3_text = findViewById(R.id.an3_text); // Answer text(오답)
 
         Button an0_btn = findViewById(R.id.an0_btn); // Answer button(정답)
         Button an1_btn = findViewById(R.id.an1_btn); // Answer button(오답)
@@ -76,17 +77,17 @@ public class QuizActivity extends AppCompatActivity { // 퀴즈
 
                         //랜덤으로 정해진 random 값에 따라 text 에 an0(정답)넣고 나머지에 test 에 an1-3(오답) 넣기
                         if (rand == 0) {
-                            an0_text.setText(q_an0); an1_text.setText(q_an1);
-                            an2_text.setText(q_an2); an3_text.setText(q_an3);
+                            an0_btn.setText(q_an0); an1_btn.setText(q_an1);
+                            an2_btn.setText(q_an2); an3_btn.setText(q_an3);
                         } else if (rand == 1) {
-                            an1_text.setText(q_an0); an0_text.setText(q_an1);
-                            an2_text.setText(q_an2); an3_text.setText(q_an3);
+                            an1_btn.setText(q_an0); an0_btn.setText(q_an1);
+                            an2_btn.setText(q_an2); an3_btn.setText(q_an3);
                         } else if (rand == 2) {
-                            an2_text.setText(q_an0); an0_text.setText(q_an1);
-                            an1_text.setText(q_an2); an3_text.setText(q_an3);
+                            an2_btn.setText(q_an0); an0_btn.setText(q_an1);
+                            an1_btn.setText(q_an2); an3_btn.setText(q_an3);
                         } else if (rand == 3) {
-                            an3_text.setText(q_an0); an0_text.setText(q_an1);
-                            an1_text.setText(q_an2); an2_text.setText(q_an3);
+                            an3_btn.setText(q_an0); an0_btn.setText(q_an1);
+                            an1_btn.setText(q_an2); an2_btn.setText(q_an3);
                         }
                     } else {
                         Toast.makeText(getApplicationContext(), "가져오기 실패", Toast.LENGTH_SHORT).show();

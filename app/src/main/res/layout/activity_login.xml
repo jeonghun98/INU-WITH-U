@@ -73,7 +73,7 @@
 
             android:fontFamily="@font/pfstardust"
             android:hint="학번"
-            android:inputType="text"
+            android:inputType="number"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textColorHint="@color/black"

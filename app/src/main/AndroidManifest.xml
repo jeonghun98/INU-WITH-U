@@ -28,9 +28,6 @@
         android:theme="@style/Theme.AppCompat.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".QuizActivity"
-            android:exported="false" />
-        <activity
             android:name=".LoadingActivity"
             android:exported="true">
             <intent-filter>
@@ -50,6 +47,7 @@
         <activity android:name=".MapInStampActivity" />
         <activity android:name=".WhereStampActivity" />
         <activity android:name=".CameraActivity" />
+        <activity android:name=".QuizActivity" />
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="kaqo08g1s6" />
