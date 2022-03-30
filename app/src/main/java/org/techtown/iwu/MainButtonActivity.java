@@ -42,7 +42,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 public class MainButtonActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG = "MainButtonActivity";
     ImageButton MainCambtn, MainSetbtn, MainStampbtn; //이미지버튼 Map, Setting, Stamp 선언

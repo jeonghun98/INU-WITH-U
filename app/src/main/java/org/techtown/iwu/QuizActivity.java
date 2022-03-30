@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -141,6 +142,7 @@ public class QuizActivity extends AppCompatActivity { // 퀴즈
 
 
     private void showMessage_quiz(int key) {
+        /*
         Intent intent = getIntent();
         int b_id = intent.getIntExtra("b_id", 0);
         String u_id = intent.getStringExtra("u_id"); // u_id 받기
@@ -162,5 +164,52 @@ public class QuizActivity extends AppCompatActivity { // 퀴즈
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+
+         */
+        Intent intent = getIntent();
+        int b_id = intent.getIntExtra("b_id", 0);
+        String u_id = intent.getStringExtra("u_id"); // u_id 받기
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_quizresult, null);
+        builder.setView(dialogView);
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        TextView result = alertDialog.findViewById(R.id.quiz_result);
+        Button exit =alertDialog.findViewById(R.id.exit_from_quiz);
+
+        if (key == 0)
+            result.setText("정답입니다."+"\n"+" 스탬프를 획득하셨습니다!");
+        else if (key == 1)
+            result.setText("오답입니다."+"\n"+"다시 풀어주세요.");
+
+        exit.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+
+                if(key == 0){
+                    Response.Listener<String> responseListener = new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                        }
+                    };
+                    StampRequest Stamprequest = new StampRequest(u_id, b_id, responseListener); // 나가기 버튼 누르면 DB로 전송
+                    RequestQueue queue = Volley.newRequestQueue(QuizActivity.this);
+                    queue.add(Stamprequest);
+                    finish();
+                }
+            }
+
+
+        });
+
+
+
+
+
     }
 }
