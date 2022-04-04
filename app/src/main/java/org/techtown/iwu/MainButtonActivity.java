@@ -18,7 +18,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -39,7 +41,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
 
 public class MainButtonActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG = "MainButtonActivity";
@@ -95,7 +96,6 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
         //화면에 나타나는 임시 어워드 (초기 설정 : 보이지 않음) ->[ay.han]설정값 GONE으로 수정
         btn = findViewById(R.id.imagebtn);
         btn.setVisibility(View.GONE);
-
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -254,6 +254,7 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
     }
 
     private void showMessage_award() { //어워드 획득 후 나타나는 dialog 메소드
+       /*
         Intent intent = getIntent();
         userID = intent.getStringExtra("u_id"); // u_id 받기
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -279,6 +280,50 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+
+        */
+
+        Intent intent = getIntent();
+        userID = intent.getStringExtra("u_id"); // u_id 받기
+
+        String b_name;
+        if (b_id == 31) b_name = "미유카페";
+        else if (b_id == 21) b_name = "솔찬공원";
+        else b_name = b_id + "호관";
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog, null);
+        builder.setView(dialogView);
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        TextView getbuilding = alertDialog.findViewById(R.id.getbuilding);
+        Button exit =alertDialog.findViewById(R.id.exit);
+        Button quiz =alertDialog.findViewById(R.id.quiz);
+
+        getbuilding.setText(b_name+ " 아이템을 획득하셨습니다.");
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        quiz.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+
+                Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
+                intent.putExtra("u_id", userID); // u_id도 같이 넘겨주기 (string)
+                if(b_id > 0 && b_id < 33)
+                    intent.putExtra("b_id", b_id); // quiz activity -> 사용자가 발견한 b_id 넘겨줌
+                startActivity(intent);
+
+            }
+        });
     }
 
     //해당 코드는 4G(3G)를 사용하지 않는 핸드폰에서 작용하지 않아서 -> 현재 virtual device 만 가능
