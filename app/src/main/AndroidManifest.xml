@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="org.techtown.iwu">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -26,7 +27,8 @@
         android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".LoadingActivity"
             android:exported="true">
@@ -48,9 +50,18 @@
         <activity android:name=".WhereStampActivity" />
         <activity android:name=".CameraActivity" />
         <activity android:name=".QuizActivity" />
+        <activity
+            android:name=".AugmentedImageActivity"
+            android:exported="false"
+            android:screenOrientation="locked"
+            android:configChanges="orientation|screenSize">
+        </activity> <!-- Indicates whether "Google Play Services for AR" (ARCore) is "required" or "optional". -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="kaqo08g1s6" />
+        <meta-data
+            android:name="com.google.ar.core"
+            android:value="required" />
     </application>
 
 </manifest>

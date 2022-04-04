@@ -315,13 +315,19 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
-
-                Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
-                intent.putExtra("u_id", userID); // u_id도 같이 넘겨주기 (string)
-                if(b_id > 0 && b_id < 33)
+                //[hun] 1호관만 AR
+                if(b_id == 1) {
+                    Intent intent = new Intent(getApplicationContext(), AugmentedImageActivity.class);
+                    intent.putExtra("u_id", userID); // u_id도 같이 넘겨주기 (string)
                     intent.putExtra("b_id", b_id); // quiz activity -> 사용자가 발견한 b_id 넘겨줌
-                startActivity(intent);
-
+                    startActivity(intent);
+                }
+                else if (b_id > 1 && b_id < 33) {
+                    Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
+                    intent.putExtra("u_id", userID); // u_id도 같이 넘겨주기 (string)
+                    intent.putExtra("b_id", b_id); // quiz activity -> 사용자가 발견한 b_id 넘겨줌
+                    startActivity(intent);
+                }
             }
         });
     }
