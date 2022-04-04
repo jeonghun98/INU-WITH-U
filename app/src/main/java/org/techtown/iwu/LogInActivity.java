@@ -81,7 +81,7 @@ public class LogInActivity extends AppCompatActivity {
                                 String userPass = jsonObject.getString("u_pw");
                                 String userName = jsonObject.getString( "u_name" );
                                 String userMajor = jsonObject.getString( "u_major" );
-                                int userPhone = jsonObject.getInt( "u_phone" );
+                                String userPhone = jsonObject.getString( "u_phone" );
                                 int userMid = jsonObject.getInt("u_mid");
 
                                 int UserStamp1 = jsonObject.getInt("b1_stamp");
