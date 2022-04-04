@@ -10,28 +10,30 @@
 
     <TextView
         android:id="@+id/b_text"
-        android:fontFamily="@font/pfstardust"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="70dp"
         android:layout_marginBottom="30dp"
+        android:fontFamily="@font/pfstardust"
         android:text="Quiz"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="30sp"
         android:textStyle="bold" />
 
     <TextView
-        android:fontFamily="@font/pfstardust"
         android:id="@+id/qu_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="40dp"
+        android:fontFamily="@font/pfstardust"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
 
+        android:text="question"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="25sp"

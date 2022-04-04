@@ -73,7 +73,7 @@ public class QuizActivity extends AppCompatActivity { // 퀴즈
                             if(i != Str.length-1) question += "\n";
                         }
 
-                        b_text.setText(b_id + "호관 " + b_name + " Quiz");
+                        b_text.setText(b_id + "호관\n" + b_name + " Quiz");
                         qu_text.setText(question);
 
                         //랜덤으로 정해진 random 값에 따라 text 에 an0(정답)넣고 나머지에 test 에 an1-3(오답) 넣기
