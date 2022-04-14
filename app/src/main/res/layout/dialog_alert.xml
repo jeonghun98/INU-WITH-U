@@ -29,7 +29,7 @@
                 app:srcCompat="@drawable/register" />
 
             <TextView
-                android:id="@+id/login_alert"
+                android:id="@+id/err_alert"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -37,7 +37,7 @@
 
 
                 android:paddingVertical="20dp"
-                android:text="로그인 에러 안내"
+                android:text="에러 문구 안내"
 
                 android:textAlignment="center"
                 android:textColor="@color/black"
@@ -45,7 +45,7 @@
                 android:textStyle="bold" />
 
             <Button
-                android:id="@+id/exit_from_loginalert"
+                android:id="@+id/exit_from_this"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

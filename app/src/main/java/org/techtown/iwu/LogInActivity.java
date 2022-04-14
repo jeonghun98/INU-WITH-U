@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -166,22 +165,20 @@ public class LogInActivity extends AppCompatActivity {
                 queue.add(loginRequest);
             }
         });
-
-
     }
 
     //[ay.han]로그인 창에서 사용하는 Custom dialog
     public void login_alert_dialog(int i){
         //i=1 : 학번 미입력, i=2 : 비밀번호 미입력, i=3 : 로그인실패
         AlertDialog.Builder builder = new AlertDialog.Builder(LogInActivity.this);
-        View dialogView = getLayoutInflater().inflate(R.layout.dialog_loginalert, null);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_alert, null);
         builder.setView(dialogView);
 
         final AlertDialog alertDialog = builder.create();
         alertDialog.show();
 
-        TextView login_alert = alertDialog.findViewById(R.id.login_alert);
-        Button exit =alertDialog.findViewById(R.id.exit_from_loginalert);
+        TextView login_alert = alertDialog.findViewById(R.id.err_alert);
+        Button exit =alertDialog.findViewById(R.id.exit_from_this);
 
         switch (i){
             case 1:login_alert.setText("학번을 입력해주세요.");
