@@ -145,7 +145,7 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
     b_id = intent.getIntExtra("b_id", 0);
     u_id = intent.getStringExtra("u_id"); // u_id 받기
 
-    String text = String.format(b_id + "호관 엠블런을 인식해주세요.");
+    String text = String.format(b_id + "호관 엠블럼을 인식해주세요.");
     showMessage(this, text);
   }
 

@@ -1,43 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/black">
 
-    <org.techtown.iwu.CamView
-        android:id="@+id/surfaceview"
-        android:layout_width="412dp"
-        android:layout_height="443dp"
-        android:orientation="vertical"
-        android:rotation="90"
-        android:rotationX="-0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+
+    <FrameLayout
+        android:id="@+id/previewFrame"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="608dp">
+
+    </FrameLayout>
 
     <Button
-        android:id="@+id/capture"
-        android:layout_width="wrap_content"
+        android:id="@+id/button"
+        android:layout_width="133dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_gravity="center_horizontal"
+        android:background="#00b2ed"
+        android:fontFamily="@font/pfstardust"
         android:text="사진찍기"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageview" />
-
-    <ImageView
-        android:id="@+id/imageview"
-        android:layout_width="201dp"
-        android:layout_height="206dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/surfaceview"
-        app:layout_constraintVertical_bias="0.0" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:textSize="20sp"
+        android:textStyle="bold" />
+</LinearLayout>
