@@ -88,13 +88,14 @@ public class CameraActivity extends AppCompatActivity {
                 .onGranted(new Action<List<String>>() {
                     @Override
                     public void onAction(List<String> permissions) {
-                        showToast("허용된 권한 갯수 : " + permissions.size());
+                        //showToast("허용된 권한 갯수 : " + permissions.size());
+                        //toast 가 버튼 위치와 겹침
                     }
                 })
                 .onDenied(new Action<List<String>>() {
                     @Override
                     public void onAction(List<String> permissions) {
-                        showToast("거부된 권한 갯수 : " + permissions.size());
+                        //showToast("거부된 권한 갯수 : " + permissions.size());
                     }
                 })
                 .start();
