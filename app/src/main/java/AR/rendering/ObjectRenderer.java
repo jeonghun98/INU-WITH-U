@@ -128,7 +128,7 @@ public class ObjectRenderer {
   private float[] uvTransform = null;
   private int depthTextureId;
 
-  /**
+  /*
    * Creates and initializes OpenGL resources needed for rendering the model.
    *
    * @param context Context for loading the shader and below-named model and texture assets.
@@ -223,7 +223,7 @@ public class ObjectRenderer {
     Matrix.setIdentityM(modelMatrix, 0);
   }
 
-  /**
+  /*
    * Selects the blending mode for rendering.
    *
    * @param blendMode The blending mode. Null indicates no blending (opaque rendering).
@@ -300,23 +300,31 @@ public class ObjectRenderer {
     ShaderUtil.checkGLError(TAG, "Program parameters");
   }
 
-  /**
+  /*
    * Updates the object model matrix and applies scaling.
    *
    * @param modelMatrix A 4x4 model-to-world transformation matrix, stored in column-major order.
    * @param scaleFactor A separate scaling factor to apply before the {@code modelMatrix}.
    * @see Matrix
    */
-  public void updateModelMatrix(float[] modelMatrix, float scaleFactor) {
+//  public void updateModelMatrix(float[] modelMatrix, float scaleFactor) {
+//    float[] scaleMatrix = new float[16];
+//    Matrix.setIdentityM(scaleMatrix, 0);
+//    scaleMatrix[0] = scaleFactor;
+//    scaleMatrix[5] = scaleFactor;
+//    scaleMatrix[10] = scaleFactor;
+//    Matrix.multiplyMM(this.modelMatrix, 0, modelMatrix, 0, scaleMatrix, 0);
+//  }
+  public void updateModelMatrix(float[] modelMatrix, float scaleFactorX, float scaleFactorY, float scaleFactorZ) {
     float[] scaleMatrix = new float[16];
     Matrix.setIdentityM(scaleMatrix, 0);
-    scaleMatrix[0] = scaleFactor;
-    scaleMatrix[5] = scaleFactor;
-    scaleMatrix[10] = scaleFactor;
+    scaleMatrix[0] = scaleFactorX;
+    scaleMatrix[5] = scaleFactorY;
+    scaleMatrix[10] = scaleFactorZ;
     Matrix.multiplyMM(this.modelMatrix, 0, modelMatrix, 0, scaleMatrix, 0);
   }
 
-  /**
+  /*
    * Sets the surface characteristics of the rendered model.
    *
    * @param ambient Intensity of non-directional surface illumination.
@@ -333,7 +341,7 @@ public class ObjectRenderer {
     this.specularPower = specularPower;
   }
 
-  /**
+  /*
    * Draws the model.
    *
    * @param cameraView A 4x4 view matrix, in column-major order.
