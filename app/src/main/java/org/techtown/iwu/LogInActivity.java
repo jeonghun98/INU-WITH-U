@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
@@ -54,19 +55,25 @@ public class LogInActivity extends AppCompatActivity {
                 String userPass = u_pw.getText().toString();
 
                 if(userID.equals("")){
+                    /*
                     AlertDialog.Builder builder=new AlertDialog.Builder( LogInActivity.this );
                     dialog = builder.setMessage("학번을 입력해 주세요.")
                             .setPositiveButton("확인",null)
                             .create();
                     dialog.show();
+                     */
+                    login_alert_dialog(1);
                     return;
                 }
                 if(userPass.equals("")){
+                    /*
                     AlertDialog.Builder builder=new AlertDialog.Builder( LogInActivity.this );
                     dialog = builder.setMessage("비밀번호를 입력해 주세요.")
                             .setPositiveButton("확인",null)
                             .create();
                     dialog.show();
+                     */
+                    login_alert_dialog(2);
                     return;
                 }
 
@@ -135,11 +142,14 @@ public class LogInActivity extends AppCompatActivity {
                                 startActivity(intent); // MainButtonActivity 시작
                             }
                             else { // 로그인에 실패한 경우
+                                /*
                                 AlertDialog.Builder builder=new AlertDialog.Builder( LogInActivity.this );
                                 dialog = builder.setMessage("로그인에 실패하였습니다.")
                                         .setPositiveButton("확인",null)
                                         .create();
                                 dialog.show();
+                                */
+                                login_alert_dialog(3);
                                 return;
                                 //Toast.makeText(LogInActivity.this, "로그인 실패하였습니다.", Toast.LENGTH_SHORT).show();
                             }
@@ -155,7 +165,37 @@ public class LogInActivity extends AppCompatActivity {
                 queue.add(loginRequest);
             }
         });
+    }
 
+    //[ay.han]로그인 창에서 사용하는 Custom dialog
+    public void login_alert_dialog(int i){
+        //i=1 : 학번 미입력, i=2 : 비밀번호 미입력, i=3 : 로그인실패
+        AlertDialog.Builder builder = new AlertDialog.Builder(LogInActivity.this);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_alert, null);
+        builder.setView(dialogView);
 
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        TextView login_alert = alertDialog.findViewById(R.id.err_alert);
+        Button exit =alertDialog.findViewById(R.id.exit_from_this);
+
+        switch (i){
+            case 1:login_alert.setText("학번을 입력해주세요.");
+                break;
+            case 2:login_alert.setText("비밀번호를 입력해주세요.");
+                break;
+            case 3:login_alert.setText("로그인에 실패하였습니다.");
+                break;
+        }
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        return;
     }
 }

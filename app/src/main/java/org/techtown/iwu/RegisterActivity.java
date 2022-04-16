@@ -1,16 +1,10 @@
 package org.techtown.iwu;
 
-import android.content.Context;
-import android.content.Intent;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,7 +17,6 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 // 회원가입 Activity
 
@@ -60,14 +53,17 @@ public class RegisterActivity extends AppCompatActivity {
                 String userID = u_id.getText().toString();
                 if(u_id_check)
                 {
+                    register_alert_dialog(0);
                     return;
                 }
+
                 if(userID.equals("")){
                     AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
-                    dialog = builder.setMessage("학번은 빈 칸일 수 없습니다")
+                   /* dialog = builder.setMessage("학번은 빈 칸일 수 없습니다")
                             .setPositiveButton("확인",null)
                             .create();
-                    dialog.show();
+                    dialog.show();*/
+                    register_alert_dialog(1);
                     return;
                 }
                 Response.Listener<String> responseListener=new Response.Listener<String>() {
@@ -77,21 +73,23 @@ public class RegisterActivity extends AppCompatActivity {
                             JSONObject jsonResponse=new JSONObject(response);
                             boolean success=jsonResponse.getBoolean("success");
                             if(success){
-                                AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
+                                /*AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
                                 dialog=builder.setMessage("사용할 수 있는 학번입니다.")
                                         .setPositiveButton("확인",null)
                                         .create();
-                                dialog.show();
+                                dialog.show();*/
+                                register_alert_dialog(2);
                                 u_id.setEnabled(false); // -> id 더이상 고칠 수 없게 함
                                 u_id_check=true;
                                 //validateButton.setText("확인"); // button text 변경할지는 추후에 결정
                             }
                             else{
-                                AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
+                                /*AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
                                 dialog=builder.setMessage("이미 등록된 학번입니다.")
                                         .setNegativeButton("확인",null)
                                         .create();
-                                dialog.show();
+                                dialog.show();*/
+                                register_alert_dialog(3);
                                 u_id_check = false;
                             }
                         } catch (JSONException e) {
@@ -132,21 +130,23 @@ public class RegisterActivity extends AppCompatActivity {
 
                 //학번 중복처리 안 한 경우
                 if(!u_id_check) {
-                    AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
+                    /*AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
                     dialog = builder.setMessage("학번 중복을 확인해주세요.")
                             .setPositiveButton("확인",null)
                             .create();
-                    dialog.show();
+                    dialog.show();*/
+                    register_alert_dialog(4);
                     return;
                 }
 
                 //전공 선택 안 한 경우
                 if(!u_mid_check) {
-                    AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
+                    /*AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
                     dialog = builder.setMessage("전공을 선택해주세요.")
                             .setPositiveButton("확인",null)
                             .create();
-                    dialog.show();
+                    dialog.show();*/
+                    register_alert_dialog(5);
                     return;
                 }
                 //string "" 인 경우 에러이므로 위에 코드에서 체크 후 int 형으로 변환
@@ -154,32 +154,35 @@ public class RegisterActivity extends AppCompatActivity {
 
                 //비밀번호 입력 안 한 경우
                 if(userPass.equals("")) {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    /*AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                     dialog = builder.setMessage("비밀번호를 입력해주세요.")
                             .setPositiveButton("확인", null)
                             .create();
-                    dialog.show();
+                    dialog.show();*/
+                    register_alert_dialog(6);
                     return;
                 }
 
                 //이름 입력 안 한 경우
                 if(userName.equals("")){
-                    AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
+                    /*AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
                     dialog = builder.setMessage("이름을 입력해주세요.")
                             .setPositiveButton("확인",null)
                             .create();
-                    dialog.show();
+                    dialog.show();*/
+                    register_alert_dialog(7);
                     return;
                 }
 
                 //전화번호 입력 안 한 경우
                 String userPhone = u_phone.getText().toString();
                 if(userPhone.equals("")){
-                    AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
+                    /*AlertDialog.Builder builder=new AlertDialog.Builder( RegisterActivity.this );
                     dialog = builder.setMessage("전화번호를 입력해 주세요.")
                             .setPositiveButton("확인",null)
                             .create();
-                    dialog.show();
+                    dialog.show();*/
+                    register_alert_dialog(8);
                     return;
                 }
 //                //string "" 인 경우 에러이므로 위에 코드에서 체크 후 int 형으로 변환
@@ -215,5 +218,51 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //[ay.han]가입 창에서 사용하는 Custom dialog
+    public void register_alert_dialog(int i){
+        //0: 학번 중복체크 완료, 1 : 학번 미입력, 2 : 학번 OK, 3 : 학번 NG
+        //4 : 학번 중복 안했을때,  5 : 전공 미입력, 6 : 비밀번호 미입력, 7 : 이름 미입력, 8 : 전화번호 미입력
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_alert, null);
+        builder.setView(dialogView);
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        TextView login_alert = alertDialog.findViewById(R.id.err_alert);
+        Button exit =alertDialog.findViewById(R.id.exit_from_this);
+
+        switch (i){
+            case 0:login_alert.setText("중복체크 완료되었습니다.");
+                break;
+            case 1:login_alert.setText("학번을 입력해주세요.");
+                break;
+            case 2:login_alert.setText("사용할 수 있는 학번입니다.");
+                break;
+            case 3:login_alert.setText("이미 등록된 학번입니다.");
+                break;
+            case 4:login_alert.setText("학번 중복확인을 눌러주세요");
+                break;
+            case 5:login_alert.setText("전공을 입력해주세요.");
+                break;
+            case 6:login_alert.setText("비밀번호를 입력해주세요.");
+                break;
+            case 7:login_alert.setText("이름을 입력해주세요.");
+                break;
+            case 8:login_alert.setText("전화번호를 입력해주세요.");
+                break;
+        }
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alertDialog.dismiss();
+            }
+        });
+
+        return;
     }
 }
