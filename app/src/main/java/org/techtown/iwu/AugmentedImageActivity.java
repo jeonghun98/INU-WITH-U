@@ -136,8 +136,9 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
     fitToScanView = findViewById(R.id.image_view_fit_to_scan);
     glideRequestManager = Glide.with(this);
     glideRequestManager
-        .load(Uri.parse("file:///android_asset/fit_to_scan.png"))
+        .load(Uri.parse("file:///android_asset/scan_inu.png"))
         .into(fitToScanView);
+    //[hun] scan.png 변경
 
     installRequested = false;
 
