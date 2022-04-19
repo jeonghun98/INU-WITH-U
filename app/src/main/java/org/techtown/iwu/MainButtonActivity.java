@@ -59,7 +59,7 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
     private Marker markers[] = new Marker[21];
 
     static final int b_name[] = {1,2,6,11,12,17,18,24,30,31,32}; //31 -> 미유, 32 -> 솔찬
-    static final String b_name_str[] = {"미유카페", "솔찬공원"};
+    //static final String b_name_str[] = {"미유카페", "솔찬공원"};
     static final double b_location[][] = {{37.376690, 126.634591},{37.377547, 126.633710},{37.375177, 126.633909},
             {37.374472, 126.631827},{37.375283, 126.632570},{37.374129, 126.630849},
             {37.373926, 126.629960},{37.375974, 126.635774},{37.373775, 126.634232},
@@ -75,6 +75,7 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
     private int b_stamp [][] = {{1,0},{2,0},{6,0},{11,0},{12,0},{17,0},{18,0},{24,0},{30,0},{31,0},{32,0}};
     private int b_stamp_major = 0; //major building stamp
 
+    private double lat, lon;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,7 +178,8 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
         RequestQueue queue = Volley.newRequestQueue(MainButtonActivity.this);
         queue.add(Request);
 
-        startLocationService(); //위치 활성화
+        // [hun] 와이파이만 사용한 google gps는 활성화 어려움 -> naver api 실시간 위치로 변경
+        //startLocationService(); //위치 활성화
     }
 
     @Override
@@ -192,6 +194,39 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
         naverMap.setMinZoom(15.0);
         naverMap.setMaxZoom(18.0);
         naverMap.setExtent(new LatLngBounds(new LatLng(37.370463, 126.627007), new LatLng(37.376835, 126.634652)));
+
+        // [hun] 와이파이만 사용한 google gps는 활성화 어려움 -> naver api 실시간 위치로 변경
+        mNaverMap.addOnLocationChangeListener(new NaverMap.OnLocationChangeListener() {
+            @Override
+            public void onLocationChange(@NonNull Location location) {
+                lat = location.getLatitude();
+                lon = location.getLongitude();
+                //showToast(lat + ", " + lon);
+
+                //사용자의 위치가 해당 건물의 위도,경도를 중심으로 원안에 위치해 있을 때 visible
+                for(int i = 0; i < b_location.length; i++) {
+                    if(b_stamp[i][1] == 0){ //스탬프 현황 확인 후 체크
+                        if (Math.pow(0.0004, 2) >= (Math.pow(b_location[i][0] - lat, 2) + Math.pow(b_location[i][1] - lon, 2))) {
+                            DisplayEmblem(true);
+                            b_id = b_name[i];
+                            break;
+                        }
+                        else {
+                            DisplayEmblem(false);
+                        }
+                    }
+                    else {
+                        DisplayEmblem(false);
+                    }
+                }
+                if(b_stamp_major == 0) { //스탬프 현황 확인 후 체크
+                    if(Math.pow(0.0004, 2) >= (Math.pow(b_location_major[userBuilding_index][0] - lat, 2) + Math.pow(b_location_major[userBuilding_index][1] - lon, 2))){
+                        DisplayEmblem(true);
+                        b_id = b_name_major[userBuilding_index]; // == MajorCode
+                    }
+                }
+            }
+        });
 
         ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_REQUEST_CODE);
         naverMap.addOnOptionChangeListener(() -> { // 지도 옵션 변경에 대한 이벤트 리스너 등록
@@ -332,95 +367,93 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
         });
     }
 
-    //해당 코드는 4G(3G)를 사용하지 않는 핸드폰에서 작용하지 않아서 -> 현재 virtual device 만 가능
+// [hun] 와이파이만 사용한 google gps는 활성화 어려움 -> naver api 실시간 위치로 변경
+//    해당 코드는 4G(3G)를 사용하지 않는 핸드폰에서 작용하지 않아서 -> 현재 virtual device 만 가능
 
-    public void startLocationService() {
-        LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
-        try {
-            Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if (location != null) {
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-
-                //사용자의 위치가 해당 건물의 위도,경도를 중심으로 원안에 위치해 있을 때 visible
-                for(int i = 0; i < b_location.length; i++) {
-                    if(b_stamp[i][1] == 0){ //스탬프 현황 확인 후 체크
-                        if (Math.pow(0.0004, 2) >= (Math.pow(b_location[i][0] - latitude, 2) + Math.pow(b_location[i][1] - longitude, 2))) {
-                            DisplayEmblem(true);
-                            b_id = b_name[i];
-                            break;
-                        }
-                        else {
-                            DisplayEmblem(false);
-                        }
-                    }
-                    else {
-                        DisplayEmblem(false);
-                    }
-                }
-                if(b_stamp_major == 0) { //스탬프 현황 확인 후 체크
-                    if(Math.pow(0.0004, 2) >= (Math.pow(b_location_major[userBuilding_index][0] - latitude, 2) + Math.pow(b_location_major[userBuilding_index][1] - longitude, 2))){
-                        DisplayEmblem(true);
-                        b_id = b_name_major[userBuilding_index]; // == MajorCode
-                    }
-                }
-            }
-            else showToast("location == null");
-            GPSListener gpsListener = new GPSListener();
-            long minTime = 2000; // 2초마다 위치 요청
-            float minDistance = 0;
-            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, gpsListener);
-
-        } catch (SecurityException e) {
-            e.printStackTrace();
-        }
-    }
-
-
-
-    class GPSListener implements LocationListener {
-
-        @Override
-        public void onLocationChanged(Location location) {
-            Double latitude = location.getLatitude();
-            Double longitude = location.getLongitude();
-            //String message = "location -> Latitude : " + latitude + "\nLongitude : " + longitude;
-            //showToast(message);
-
-            //사용자의 위치가 해당 건물의 위도,경도를 중심으로 원안에 위치해 있을 때 visible
-            for(int i = 0; i < b_location.length; i++) {
-                if(b_stamp[i][1] == 0){ //스탬프 현황 확인 후 체크
-                    if (Math.pow(0.0004, 2) >= (Math.pow(b_location[i][0] - latitude, 2) + Math.pow(b_location[i][1] - longitude, 2))) {
-                        DisplayEmblem(true);
-                        b_id = b_name[i];
-                        break;
-                    }
-                    else {
-                        DisplayEmblem(false);
-                    }
-                }
-                else {
-                    DisplayEmblem(false);
-                }
-            }
-
-            if(b_stamp_major == 0) { //스탬프 현황 확인 후 체크
-                if(Math.pow(0.0004, 2) >= (Math.pow(b_location_major[userBuilding_index][0] - latitude, 2) + Math.pow(b_location_major[userBuilding_index][1] - longitude, 2))){
-                    DisplayEmblem(true);
-                    b_id = b_name_major[userBuilding_index]; // == MajorCode
-                }
-            }
-        }
-
-        @Override
-        public void onStatusChanged(String provider, int status, Bundle extras) {}
-
-        @Override
-        public void onProviderEnabled(String provider) {}
-
-        @Override
-        public void onProviderDisabled(String provider) {}
-    }
+//    public void startLocationService() {
+//        LocationManager manager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+//        try {
+//            Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//            if (location != null) {
+//                double latitude = location.getLatitude();
+//                double longitude = location.getLongitude();
+//
+//                //사용자의 위치가 해당 건물의 위도,경도를 중심으로 원안에 위치해 있을 때 visible
+//                for(int i = 0; i < b_location.length; i++) {
+//                    if(b_stamp[i][1] == 0){ //스탬프 현황 확인 후 체크
+//                        if (Math.pow(0.0004, 2) >= (Math.pow(b_location[i][0] - latitude, 2) + Math.pow(b_location[i][1] - longitude, 2))) {
+//                            DisplayEmblem(true);
+//                            b_id = b_name[i];
+//                            break;
+//                        }
+//                        else {
+//                            DisplayEmblem(false);
+//                        }
+//                    }
+//                    else {
+//                        DisplayEmblem(false);
+//                    }
+//                }
+//                if(b_stamp_major == 0) { //스탬프 현황 확인 후 체크
+//                    if(Math.pow(0.0004, 2) >= (Math.pow(b_location_major[userBuilding_index][0] - latitude, 2) + Math.pow(b_location_major[userBuilding_index][1] - longitude, 2))){
+//                        DisplayEmblem(true);
+//                        b_id = b_name_major[userBuilding_index]; // == MajorCode
+//                    }
+//                }
+//            }
+//            else showToast("location == null");
+//            GPSListener gpsListener = new GPSListener();
+//            long minTime = 2000; // 2초마다 위치 요청
+//            float minDistance = 0;
+//            manager.requestLocationUpdates(LocationManager.GPS_PROVIDER, minTime, minDistance, gpsListener);
+//
+//        } catch (SecurityException e) {
+//            e.printStackTrace();
+//        }
+//    }
+//    class GPSListener implements LocationListener {
+//
+//        @Override
+//        public void onLocationChanged(Location location) {
+//            Double latitude = location.getLatitude();
+//            Double longitude = location.getLongitude();
+//            //String message = "location -> Latitude : " + latitude + "\nLongitude : " + longitude;
+//            //showToast(message);
+//
+//            //사용자의 위치가 해당 건물의 위도,경도를 중심으로 원안에 위치해 있을 때 visible
+//            for(int i = 0; i < b_location.length; i++) {
+//                if(b_stamp[i][1] == 0){ //스탬프 현황 확인 후 체크
+//                    if (Math.pow(0.0004, 2) >= (Math.pow(b_location[i][0] - latitude, 2) + Math.pow(b_location[i][1] - longitude, 2))) {
+//                        DisplayEmblem(true);
+//                        b_id = b_name[i];
+//                        break;
+//                    }
+//                    else {
+//                        DisplayEmblem(false);
+//                    }
+//                }
+//                else {
+//                    DisplayEmblem(false);
+//                }
+//            }
+//
+//            if(b_stamp_major == 0) { //스탬프 현황 확인 후 체크
+//                if(Math.pow(0.0004, 2) >= (Math.pow(b_location_major[userBuilding_index][0] - latitude, 2) + Math.pow(b_location_major[userBuilding_index][1] - longitude, 2))){
+//                    DisplayEmblem(true);
+//                    b_id = b_name_major[userBuilding_index]; // == MajorCode
+//                }
+//            }
+//        }
+//
+//        @Override
+//        public void onStatusChanged(String provider, int status, Bundle extras) {}
+//
+//        @Override
+//        public void onProviderEnabled(String provider) {}
+//
+//        @Override
+//        public void onProviderDisabled(String provider) {}
+//    }
 
     public void showToast(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
