@@ -43,7 +43,7 @@ public class AugmentedImageRenderer {
   // following code, which loads GreenMaze.obj.
   public void createOnGlThread(Context context) throws IOException {
     newRenderer.createOnGlThread(
-            context, "models/ball.obj", "models/frame0.png");
+            context, "models/ball.obj", "models/frame.png"); //[hun] 축구볼 이미지 수정
     newRenderer.setMaterialProperties(0.0f, 3.5f, 1.0f, 6.0f);
 
   }
