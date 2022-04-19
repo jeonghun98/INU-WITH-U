@@ -146,7 +146,12 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
     b_id = intent.getIntExtra("b_id", 0);
     u_id = intent.getStringExtra("u_id"); // u_id 받기
 
-    String text = String.format(b_id + "호관 엠블럼을 인식해주세요.");
+    String message = "";
+    if(b_id == 1) message =  "1호관 학교 엠블럼을 인식해 주세요";
+    else if(b_id == 6) message = "6호관 2층 석상을 인식해 주세요";
+    else if(b_id == 11) message = "11호관 3번 핸드폰 충전기 박스를 인식해 주세요";
+
+    String text = String.format(message);
     showMessage(this, text);
   }
 
@@ -386,6 +391,7 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
   }
 
   private boolean setupAugmentedImageDatabase(Config config) {
+    String imgdb = "";
     AugmentedImageDatabase augmentedImageDatabase;
     if (useSingleImage) {
       Bitmap augmentedImageBitmap = loadAugmentedImageBitmap();
@@ -396,7 +402,12 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
       augmentedImageDatabase = new AugmentedImageDatabase(session);
       augmentedImageDatabase.addImage("image_name", augmentedImageBitmap);
     } else {
-      try (InputStream is = getAssets().open("myimages2.imgdb")) {
+
+      if(b_id == 1) imgdb = "imgdb_b1.imgdb";
+      else if(b_id == 6) imgdb = "imgdb_b6.imgdb";
+      else if(b_id == 11) imgdb = "imgdb_b11.imgdb";
+
+      try (InputStream is = getAssets().open(imgdb)) {
         augmentedImageDatabase = AugmentedImageDatabase.deserialize(session, is);
       } catch (IOException e) {
         Log.e(TAG, "IO exception loading augmented image database.", e);

@@ -29,7 +29,9 @@ import com.naver.maps.geometry.LatLngBounds;
 import com.naver.maps.map.LocationTrackingMode;
 import com.naver.maps.map.MapFragment;
 import com.naver.maps.map.NaverMap;
+import com.naver.maps.map.NaverMapOptions;
 import com.naver.maps.map.OnMapReadyCallback;
+import com.naver.maps.map.UiSettings;
 import com.naver.maps.map.overlay.LocationOverlay;
 import com.naver.maps.map.overlay.Marker;
 import com.naver.maps.map.overlay.OverlayImage;
@@ -231,7 +233,7 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
         ActivityCompat.requestPermissions(this, PERMISSIONS, PERMISSION_REQUEST_CODE);
         naverMap.addOnOptionChangeListener(() -> { // 지도 옵션 변경에 대한 이벤트 리스너 등록
             LocationTrackingMode mode = mNaverMap.getLocationTrackingMode(); // 위치추적모드 반환
-            mLocationSource.setCompassEnabled(mode == LocationTrackingMode.Follow || mode == LocationTrackingMode.Face); // 나침반(카메라 좌표 이용 시) 사용
+            mLocationSource.setCompassEnabled(mode == LocationTrackingMode.Follow); // 나침반(카메라 좌표 이용 시) 사용
             // 권한확인. 결과는 onRequestPermissionsResult 콜백 매서드 호출
         });
     }
@@ -244,7 +246,7 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (grantResults.length > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                mNaverMap.setLocationTrackingMode(LocationTrackingMode.Face); // 위치추적 + 카메라 좌표 + 방향 을 움직이는 모드
+                mNaverMap.setLocationTrackingMode(LocationTrackingMode.Follow); // 위치추적 + 카메라 좌표 + 방향 을 움직이는 모드
             }
         }
         LocationOverlay locationOverlay = mNaverMap.getLocationOverlay(); // 지도로부터 위치 오버레이 객체를 가져옴.
@@ -323,7 +325,7 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
 
         String b_name;
         if (b_id == 31) b_name = "미유카페";
-        else if (b_id == 21) b_name = "솔찬공원";
+        else if (b_id == 32) b_name = "솔찬공원";
         else b_name = b_id + "호관";
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -350,15 +352,15 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
-                //[hun] 1호관만 AR
-                if(b_id == 1) {
-                    Intent intent = new Intent(getApplicationContext(), AugmentedImageActivity.class);
-                    intent.putExtra("u_id", userID); // u_id도 같이 넘겨주기 (string)
-                    intent.putExtra("b_id", b_id); // quiz activity -> 사용자가 발견한 b_id 넘겨줌
-                    startActivity(intent);
-                }
-                else if (b_id > 1 && b_id < 33) {
-                    Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
+                //[hun] 1,6,11호관 2차인증 -> AR
+                if(b_id > 0 && b_id < 33) {
+                    Intent intent;
+                    if(b_id == 1 || b_id == 6 || b_id == 11) {
+                        intent = new Intent(getApplicationContext(), AugmentedImageActivity.class);
+                    }
+                    else{
+                        intent = new Intent(getApplicationContext(), QuizActivity.class);
+                    }
                     intent.putExtra("u_id", userID); // u_id도 같이 넘겨주기 (string)
                     intent.putExtra("b_id", b_id); // quiz activity -> 사용자가 발견한 b_id 넘겨줌
                     startActivity(intent);
