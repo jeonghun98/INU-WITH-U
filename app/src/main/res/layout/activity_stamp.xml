@@ -18,24 +18,7 @@
         android:orientation="vertical">
 
 
-        <Button
-            android:id="@+id/MapStamp"
-            android:text="2D MAP으로 보기"
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:gravity="center"
-
-            android:background="#00b2ed"
-            android:fontFamily="@font/pfstardust"
-            android:paddingHorizontal="10dip"
-            android:layout_margin="12dp"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:layout_weight="1"
-
-            />
 
         <TextView
             android:id="@+id/text4"
@@ -49,10 +32,8 @@
             android:textSize="35sp"
             android:textStyle="bold"
             android:layout_weight="1"
-
+            android:layout_marginTop="30sp"
             />
-
-
 
         <GridLayout
             android:layout_width="match_parent"
@@ -61,6 +42,7 @@
             android:columnCount="3"
             android:orientation="horizontal"
             android:layout_weight="8"
+            android:layout_marginTop="20sp"
             >
 
 
@@ -76,9 +58,10 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:padding="5dp"
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon" />
+                    app:srcCompat="@drawable/soccerball_blue" />
 
                 <TextView
                     android:layout_width="100dp"
@@ -106,9 +89,11 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:padding="5dp"
+
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon" />
+                    app:srcCompat="@drawable/soccerball_blue" />
 
                 <TextView
                     android:layout_width="100dp"
@@ -134,9 +119,11 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:padding="5dp"
+
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon" />
+                    app:srcCompat="@drawable/soccerball_blue" />
 
                 <TextView
                     android:layout_width="100dp"
@@ -163,9 +150,11 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:padding="5dp"
+
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon" />
+                    app:srcCompat="@drawable/soccerball_blue" />
 
                 <TextView
                     android:layout_width="100dp"
@@ -193,9 +182,11 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:padding="5dp"
+
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon" />
+                    app:srcCompat="@drawable/soccerball_blue" />
 
                 <TextView
                     android:layout_width="100dp"
@@ -221,9 +212,11 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:padding="5dp"
+
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon" />
+                    app:srcCompat="@drawable/soccerball_blue" />
 
                 <TextView
                     android:layout_width="100dp"
@@ -250,9 +243,11 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:padding="5dp"
+
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon" />
+                    app:srcCompat="@drawable/soccerball_blue" />
 
                 <TextView
                     android:layout_width="100dp"
@@ -280,9 +275,11 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:padding="5dp"
+
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon" />
+                    app:srcCompat="@drawable/soccerball_blue" />
 
                 <TextView
                     android:layout_width="100dp"
@@ -308,9 +305,11 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:padding="5dp"
+
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon" />
+                    app:srcCompat="@drawable/soccerball_blue" />
 
                 <TextView
                     android:layout_width="100dp"
@@ -338,9 +337,11 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:padding="5dp"
+
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon" />
+                    app:srcCompat="@drawable/soccerball_blue" />
 
                 <TextView
                     android:layout_width="100dp"
@@ -369,9 +370,11 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:padding="5dp"
+
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon"  />
+                    app:srcCompat="@drawable/soccerball_blue"  />
 
                 <TextView
                     android:layout_width="100dp"
@@ -399,9 +402,11 @@
                     android:layout_height="100dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="16dp"
+                    android:padding="5dp"
+
                     android:background="@android:color/transparent"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/icon"  />
+                    app:srcCompat="@drawable/soccerball_blue"  />
 
                 <TextView
                     android:id="@+id/stamp12txt"
@@ -417,10 +422,7 @@
 
             </LinearLayout>
 
-
         </GridLayout>
-
-
 
     </LinearLayout>
 
