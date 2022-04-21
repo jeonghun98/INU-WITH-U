@@ -119,8 +119,8 @@ public class StampActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(StampActivity.this);
         queue.add(Request);
 
-
-        Mapstamp = (Button) findViewById(R.id.MapStamp); // stamp내의 2D MAP으로 스탬프현황 보기
+        //[ay.han] 2D Stamp는 Main에서 진입으로 디자인 변경
+        /*Mapstamp = (Button) findViewById(R.id.MapStamp); // stamp내의 2D MAP으로 스탬프현황 보기
         Mapstamp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,7 +142,7 @@ public class StampActivity extends AppCompatActivity {
 
                 startActivity(intent); // MapInStampActivity 수행
             }
-        });
+        });*/
     }
 
 

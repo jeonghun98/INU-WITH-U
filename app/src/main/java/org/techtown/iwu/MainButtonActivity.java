@@ -46,7 +46,7 @@ import org.json.JSONObject;
 
 public class MainButtonActivity extends AppCompatActivity implements OnMapReadyCallback {
     private static final String TAG = "MainButtonActivity";
-    ImageButton MainCambtn, MainSetbtn, MainStampbtn; //이미지버튼 Map, Setting, Stamp 선언
+    ImageButton MainCambtn, MainSetbtn, MainStampbtn, Mapstamp; //이미지버튼 Map, Setting, Stamp 선언
     ImageButton btn; //임시 방편 어워드 버튼
     String userID;
     int b_id = 0;
@@ -106,16 +106,41 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
                 showMessage_award();
             }
         });
-
-        MainCambtn = (ImageButton) findViewById(R.id.maincam); // MainMapbtn 받아오기
-
+        //[ay.han] Camera btn 을 2D Map 보기로 변경
+       /* MainCambtn = (ImageButton) findViewById(R.id.maincam); // MainMapbtn 받아오기
         MainCambtn.setOnClickListener(new View.OnClickListener() { // 메인화면에서 지도 버튼 클릭 시 수행
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), CameraActivity.class); // MapActivity 수행
                 startActivity(intent); //CameraActivity 시작
             }
+        });*/
+
+        Mapstamp = findViewById(R.id.MapStamp); // stamp내의 2D MAP으로 스탬프현황 보기
+        Mapstamp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), MapInStampActivity.class); // MapInStampActivity 실행
+                intent.putExtra("u_Building", userBuilding);
+                intent.putExtra("u_id", userID);// [ay.han] u_id 넘겨줌
+                intent.putExtra("b1_stamp", b_stamp[0][1]); //[ay.han] bx_stamp 넘겨줌
+                intent.putExtra("b2_stamp", b_stamp[1][1]);
+                intent.putExtra("b6_stamp", b_stamp[2][1]);
+                intent.putExtra("b11_stamp", b_stamp[3][1]);
+                intent.putExtra("b12_stamp", b_stamp[4][1]);
+                intent.putExtra("b17_stamp", b_stamp[5][1]);
+                intent.putExtra("b18_stamp", b_stamp[6][1]);
+                intent.putExtra("b24_stamp", b_stamp[7][1]);
+                intent.putExtra("b30_stamp", b_stamp[8][1]);
+                intent.putExtra("b31_stamp", b_stamp[9][1]);
+                intent.putExtra("b32_stamp", b_stamp[10][1]);
+                intent.putExtra("b0_stamp", b_stamp_major);
+
+                startActivity(intent); // MapInStampActivity 수행
+            }
         });
+
+
 
         MainSetbtn = (ImageButton) findViewById(R.id.mainset); // MainSettingbtn 받아오기
 
