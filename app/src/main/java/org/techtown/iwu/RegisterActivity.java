@@ -66,6 +66,11 @@ public class RegisterActivity extends AppCompatActivity {
                     register_alert_dialog(1);
                     return;
                 }
+                //[hun] 유저 등록 예외처리
+                if(!(userID.length() == 9)) {
+                    register_alert_dialog(9);
+                    return;
+                }
                 Response.Listener<String> responseListener=new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -187,6 +192,11 @@ public class RegisterActivity extends AppCompatActivity {
                 }
 //                //string "" 인 경우 에러이므로 위에 코드에서 체크 후 int 형으로 변환
 //                int userPhone = Integer.parseInt(userPhone);
+                //[hun] 유저 등록 예외처리
+                if(!(userPhone.length() == 13)) {
+                    register_alert_dialog(10);
+                    return;
+                }
 
                 Response.Listener<String> responseListener = new Response.Listener<String>() {
                     @Override
@@ -253,6 +263,10 @@ public class RegisterActivity extends AppCompatActivity {
             case 7:login_alert.setText("이름을 입력해주세요.");
                 break;
             case 8:login_alert.setText("전화번호를 입력해주세요.");
+                break;
+            case 9:login_alert.setText("학번을 9자리로 입력해주세요.");
+                break;
+            case 10:login_alert.setText("전화번호를 11자리로 입력해주세요.");
                 break;
         }
 

@@ -45,7 +45,7 @@
         android:ems="10"
         android:fontFamily="@font/pfstardust"
         android:hint="학번"
-        android:inputType="text"
+        android:inputType="number"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:textAlignment="center"
