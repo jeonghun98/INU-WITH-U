@@ -118,6 +118,8 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
   private int b_id;
   private String u_id;
 
+  private ImageView ar_photo_btn;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -147,12 +149,22 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
     u_id = intent.getStringExtra("u_id"); // u_id 받기
 
     String message = "";
-    if(b_id == 1) message =  "1호관 학교 엠블럼을 인식해 주세요";
-    else if(b_id == 6) message = "6호관 2층 석상을 인식해 주세요";
-    else if(b_id == 11) message = "11호관 3번 핸드폰 충전기 박스를 인식해 주세요";
+    if(b_id == 1) message =  "1호관\n학교 엠블럼을 인식해 주세요";
+    else if(b_id == 6) message = "6호관\n2층 석상을 인식해 주세요";
+    else if(b_id == 11) message = "11호관 핸드폰 충전기 박스를\n인식해 주세요";
 
     String text = String.format(message);
     showMessage(this, text);
+
+    ar_photo_btn = findViewById(R.id.ar_photo_btn);
+    ar_photo_btn.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View v) {
+        Intent intent = new Intent(AugmentedImageActivity.this, Arphoto.class);
+        intent.putExtra("b_id", b_id);
+        startActivity(intent); // Register Activity 시작
+      }
+    });
   }
 
   @Override
@@ -462,7 +474,7 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
                 TextView SnackBarText = (TextView)snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
                 //SnackBarText.setMaxLines(maxLines);
 
-                SnackBarText.setTextSize(20);
+                SnackBarText.setTextSize(25);
                 SnackBarText.setTextAlignment(snackbarView.TEXT_ALIGNMENT_CENTER);
 
                 if(message.equals("이미지를 인식하였습니다.")){

@@ -14,10 +14,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
     <uses-feature android:name="android.hardware.location.gps" />
-
 
     <application
         android:allowBackup="true"
@@ -49,12 +48,12 @@
         <activity android:name=".WhereStampActivity" />
         <activity android:name=".CameraActivity" />
         <activity android:name=".QuizActivity" />
+        <activity android:name=".Arphoto" />
         <activity
             android:name=".AugmentedImageActivity"
+            android:configChanges="orientation|screenSize"
             android:exported="false"
-            android:screenOrientation="locked"
-            android:configChanges="orientation|screenSize">
-        </activity> <!-- Indicates whether "Google Play Services for AR" (ARCore) is "required" or "optional". -->
+            android:screenOrientation="locked"></activity> <!-- Indicates whether "Google Play Services for AR" (ARCore) is "required" or "optional". -->
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
             android:value="kaqo08g1s6" />
