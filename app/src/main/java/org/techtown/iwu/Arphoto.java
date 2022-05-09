@@ -25,6 +25,7 @@ public class Arphoto extends AppCompatActivity {
 
         if(b_id == 1) image.setImageResource(R.drawable.b_1);
         else if(b_id == 6) image.setImageResource(R.drawable.b_6);
+        else if(b_id == 7) image.setImageResource(R.drawable.b_7);
         else if(b_id == 11) image.setImageResource(R.drawable.b_11);
 
         text.setText(b_id + "호관 인식 이미지");

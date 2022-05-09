@@ -97,7 +97,7 @@
         <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/drawable/border_login.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/drawable/icon.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/layout/activity_argumentedimage.xml" value="0.25" />
-        <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/layout/activity_arphoto.xml" value="0.25" />
+        <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/layout/activity_arphoto.xml" value="0.2" />
         <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/layout/activity_infor.xml" value="0.25" />
         <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/layout/activity_loading.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/layout/activity_login.xml" value="0.23802083333333332" />
@@ -111,6 +111,8 @@
         <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/layout/activity_setting.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/layout/activity_stamp.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/layout/activity_wherestamp.xml" value="0.23802083333333332" />
+        <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/layout/dialog_alert.xml" value="0.23541666666666666" />
+        <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/layout/dialog_quizresult.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/kimjeonghun/Downloads/Capstone2022/Capstone2022/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.25555555555555554" />
       </map>
     </option>

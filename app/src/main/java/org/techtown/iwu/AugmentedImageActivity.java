@@ -32,6 +32,7 @@ import android.os.Handler;
 import android.util.Log;
 import android.util.Pair;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.Response;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.RequestManager;
@@ -151,7 +153,8 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
     String message = "";
     if(b_id == 1) message =  "1호관\n학교 엠블럼을 인식해 주세요";
     else if(b_id == 6) message = "6호관\n2층 석상을 인식해 주세요";
-    else if(b_id == 11) message = "11호관 핸드폰 충전기 박스를\n인식해 주세요";
+    else if(b_id == 7) message = "7호관\n416호 세미나실을 인식해 주세요";
+    else if(b_id == 11) message = "11호관\n3번째 핸드폰 충전기 박스를\n인식해 주세요";
 
     String text = String.format(message);
     showMessage(this, text);
@@ -417,6 +420,7 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
 
       if(b_id == 1) imgdb = "imgdb_b1.imgdb";
       else if(b_id == 6) imgdb = "imgdb_b6.imgdb";
+      else if(b_id == 7) imgdb = "imgdb_b7.imgdb";
       else if(b_id == 11) imgdb = "imgdb_b11.imgdb";
 
       try (InputStream is = getAssets().open(imgdb)) {
@@ -453,6 +457,31 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
     show(activity, errorMessage);
   }
 
+  private void showdialog(final Activity activity){
+    AlertDialog.Builder builder = new AlertDialog.Builder(this);
+    View dialogView = getLayoutInflater().inflate(R.layout.dialog_quizresult, null);
+    builder.setView(dialogView);
+
+    final AlertDialog alertDialog = builder.create();
+    alertDialog.show();
+
+    TextView result = alertDialog.findViewById(R.id.quiz_result);
+    Button exit =alertDialog.findViewById(R.id.exit_from_quiz);
+    result.setText("스탬프를 획득하셨습니다!");
+
+    exit.setOnClickListener(new View.OnClickListener() {
+
+      @Override
+      public void onClick(View view) {
+        alertDialog.dismiss();
+        StampRequest Stamprequest = new StampRequest(u_id, b_id, response -> onClick(view)); // 나가기 버튼 누르면 DB로 전송
+        RequestQueue queue = Volley.newRequestQueue(AugmentedImageActivity.this);
+        queue.add(Stamprequest);
+        activity.finish();
+      }
+    });
+  }
+
   private void show(
           final Activity activity, final String message) {
     activity.runOnUiThread(
@@ -472,19 +501,28 @@ public class AugmentedImageActivity extends AppCompatActivity implements GLSurfa
                 snackbarView = messageSnackbar.getView();
                 snackbarView.setBackgroundColor(BACKGROUND_COLOR);
                 TextView SnackBarText = (TextView)snackbarView.findViewById(com.google.android.material.R.id.snackbar_text);
-                //SnackBarText.setMaxLines(maxLines);
-
+                SnackBarText.setMaxLines(3);
                 SnackBarText.setTextSize(25);
                 SnackBarText.setTextAlignment(snackbarView.TEXT_ALIGNMENT_CENTER);
+
+                //[hun] getAssets()을 사용하기 위해서 폰트를 assets/models 에 추가함
+                Typeface font = Typeface.createFromAsset(getApplicationContext().getAssets(), "models/pfstardust.ttf");
+                SnackBarText.setTypeface(font);
+
+                TextView snackbarActionTextView = (TextView)snackbarView.findViewById(com.google.android.material.R.id.snackbar_action);
+                snackbarActionTextView.setTextSize(25);
+                snackbarActionTextView.setTypeface(font);
+                snackbarActionTextView.setTypeface(snackbarActionTextView.getTypeface(), Typeface.BOLD);
 
                 if(message.equals("이미지를 인식하였습니다.")){
                   messageSnackbar.setAction("확인", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                      StampRequest Stamprequest = new StampRequest(u_id, b_id, response -> onClick(v)); // 나가기 버튼 누르면 DB로 전송
-                      RequestQueue queue = Volley.newRequestQueue(AugmentedImageActivity.this);
-                      queue.add(Stamprequest);
-                      activity.finish();
+                      showdialog(activity);
+//                      StampRequest Stamprequest = new StampRequest(u_id, b_id, response -> onClick(v)); // 나가기 버튼 누르면 DB로 전송
+//                      RequestQueue queue = Volley.newRequestQueue(AugmentedImageActivity.this);
+//                      queue.add(Stamprequest);
+//                      activity.finish();
                     }
                   });
                 }

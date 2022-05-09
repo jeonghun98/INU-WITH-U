@@ -45,26 +45,11 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/an1_btn"
-            android:layout_width="260dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="40dp"
-            android:background="@color/blue"
-            android:fontFamily="@font/pfstardust"
-            android:text="Answer 2"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <Button
             android:id="@+id/an0_btn"
             android:layout_width="260dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="40dp"
             android:background="@color/blue"
             android:fontFamily="@font/pfstardust"
@@ -76,10 +61,25 @@
             android:textStyle="bold" />
 
         <Button
+            android:id="@+id/an1_btn"
+            android:layout_width="260dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="40dp"
+            android:background="@color/blue"
+            android:fontFamily="@font/pfstardust"
+            android:text="Answer 2"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
             android:id="@+id/an2_btn"
             android:layout_width="260dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="40dp"
             android:background="@color/blue"
             android:fontFamily="@font/pfstardust"
@@ -94,7 +94,7 @@
             android:id="@+id/an3_btn"
             android:layout_width="260dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="80dp"
+            android:layout_gravity="center_horizontal"
             android:background="@color/blue"
             android:fontFamily="@font/pfstardust"
             android:text="Answer 4"

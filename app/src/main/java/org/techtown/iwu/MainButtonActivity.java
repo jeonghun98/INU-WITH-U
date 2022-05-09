@@ -377,10 +377,10 @@ public class MainButtonActivity extends AppCompatActivity implements OnMapReadyC
             @Override
             public void onClick(View view) {
                 alertDialog.dismiss();
-                //[hun] 1,6,11호관 2차인증 -> AR
+                //[hun] 1,6,7,11호관 2차인증 -> AR
                 if(b_id > 0 && b_id < 33) {
                     Intent intent;
-                    if(b_id == 1 || b_id == 6 || b_id == 11) {
+                    if(b_id == 1 || b_id == 6 || b_id == 7 ||b_id == 11) {
                         intent = new Intent(getApplicationContext(), AugmentedImageActivity.class);
                     }
                     else{
